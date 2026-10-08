@@ -1,0 +1,25 @@
+{
+  "root": "/workspace/switchgear-vision-inspection/data",
+  "train_count": 5,
+  "val_count": 1,
+  "test_count": 1,
+  "annotations_per_class": {
+    "scratch": 0,
+    "dent": 0,
+    "weld_porosity": 0,
+    "weld_crack": 0,
+    "corrosion": 7,
+    "misaligned_busbar": 0,
+    "missing_or_loose_component": 0
+  },
+  "errors": [],
+  "warnings": [
+    "no annotations for class scratch",
+    "no annotations for class dent",
+    "no annotations for class weld_porosity",
+    "no annotations for class weld_crack",
+    "no annotations for class misaligned_busbar",
+    "no annotations for class missing_or_loose_component"
+  ],
+  "near_duplicate_bits": 6
+}

@@ -1,0 +1,8 @@
+class_name,precision,recall,ap50,ap50_95
+scratch,,,,
+dent,,,,
+weld_porosity,,,,
+weld_crack,,,,
+corrosion,,,,
+misaligned_busbar,,,,
+missing_or_loose_component,,,,

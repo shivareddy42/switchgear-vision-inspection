@@ -1,0 +1,2 @@
+date,hour,total_inspections,passes,fails,failure_rate,average_inference_ms,defect_class,defect_count,average_confidence
+2026-10-08,19,1,1,0,0.0000,898.819,,0,
