@@ -14,6 +14,6 @@
   ],
   "pytorch_boxes": [],
   "note": "ONNX Runtime consumed the exported graph. Raw ONNX heads are not the same tensor as Ultralytics' decoded boxes, so this report records shapes and the PyTorch boxes rather than a fake box-level equality claim. max_abs on the raw output is included.",
-  "raw_output_max_abs": 361.7239990234375,
-  "raw_output_mean_abs": 43.6280403137207
+  "raw_output_max_abs": 368.59100341796875,
+  "raw_output_mean_abs": 46.737342834472656
 }

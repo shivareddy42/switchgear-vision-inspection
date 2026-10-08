@@ -18,25 +18,25 @@ These numbers come from the project description. This repository did not reprodu
 
 Measured on 2026-10-08. No GPU was available. The checkpoint is `outputs/training/yolov8/weights/best.pt`, started from `yolov8n.pt`. Training was 5 epochs, image size 320, batch 4, AdamW, learning rate 0.001, seed 42, CPU, workers 0. Early-stopping patience was 5 and did not fire. The run is in `outputs/training/yolov8/results.csv`.
 
-Held-out test, one image (`Rusty_steel_plate.jpg`), NMS IoU 0.5, from `python evaluate.py`:
+Held-out test, 3 images (badly rusted pipes, the VIGV weld crack, and `Corroded_Bolt.jpg`), NMS IoU 0.5, from `python evaluate.py`:
 
 | Metric | Value |
 | --- | --- |
-| precision | 0.0 |
-| recall | 0.0 |
-| F1 | 0.0 |
-| mAP@0.5 | 0.0 |
-| mAP@0.5:0.95 | 0.0 |
-| test images | 1 |
+| precision | 0.007352941176470588 |
+| recall | 0.25 |
+| F1 | 0.014285714285714287 |
+| mAP@0.5 | 0.12375 |
+| mAP@0.5:0.95 | 0.06187499999999999 |
+| test images | 3 |
 
-CPU time reported by Ultralytics on that test image: preprocess 0.107 ms, inference 19.901 ms, postprocess 0.635 ms. That is not a Jetson measurement and it is not 42 ms/frame.
+CPU time in `outputs/evaluation_summary.json` for that pass: preprocess 0.12682933341541988 ms, inference 12.12008533335999 ms, postprocess 0.5936600000495673 ms. That is not a Jetson measurement and it is not 42 ms/frame.
 
-Ultralytics did not return a 7-class vector on this one-image test, so `outputs/per_class_metrics.csv` lists the class names with empty metric cells. The aggregate numbers above are the test result.
+Ultralytics did not return a 7-class vector, so `outputs/per_class_metrics.csv` lists the class names with empty metric cells. The aggregate numbers above are the test result. Saved test predictions top out near confidence 0.0027.
 
-During training, Ultralytics scored the one validation image (`Clean_pump.jpg`) the same way at every epoch: precision 0.04167, recall 1.0, mAP@0.5 0.06633, mAP@0.5:0.95 0.00663. That is a validation-loop figure, not the test result, and it did not improve across the 5 epochs.
+During training, Ultralytics scored the 3 validation images. The last row of `results.csv` is precision 0.00794, recall 0.5, mAP@0.5 0.27528, mAP@0.5:0.95 0.04685. The same mAP@0.5 was 0.15393 for epochs 1–3. That is a validation-loop figure, not the test result.
 
-At the example confidence thresholds, `infer.py` on the test image returned PASS with zero detections (end-to-end 898.8 ms on the first call, which includes process startup). The rust box is still in the label, so this PASS is a missed defect. False-reject rate is not estimable: the split has no confirmed-good image.
+At the example confidence thresholds, `infer.py` on `Corroded_Bolt.jpg` returned PASS with zero detections (end-to-end 1029.5 ms on the first call, which includes process startup). The rust box is still in the label, so this PASS is a missed defect. The validation sweep from 0.10 to 0.90 misses all 4 validation boxes. False-reject rate is not estimable: the split has no confirmed-good image.
 
-ONNX export of the same checkpoint passed `onnx.checker`. ONNX Runtime loaded the graph. The raw head shape is `(1, 11, 2100)`. On the sample image the PyTorch decoder returned no boxes. Raw ONNX output max absolute value was 361.72 and the mean absolute value was 43.63. Those are head activations, not a claim that decoded boxes match.
+ONNX export of the same checkpoint passed `onnx.checker`. ONNX Runtime loaded the graph. The raw head shape is `(1, 11, 2100)`. On the sample image the PyTorch decoder returned no boxes. Raw ONNX output max absolute value was 368.59100341796875 and the mean absolute value was 46.737342834472656. Those are head activations, not a claim that decoded boxes match.
 
-The model is not a plant inspection model. It was trained on five public corrosion photos that are not switchgear.
+The model is not a plant inspection model. It was trained on 16 public photos. Three classes still have no labels, and the photos that do are not switchgear enclosures.

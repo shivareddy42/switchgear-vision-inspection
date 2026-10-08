@@ -5,13 +5,13 @@
   "split": "test",
   "device": "cpu",
   "nms_iou": 0.5,
-  "n_test_images": 1,
-  "n_val_images": 1,
-  "precision": 0.0,
-  "recall": 0.0,
-  "f1": 0.0,
-  "map50": 0.0,
-  "map50_95": 0.0,
+  "n_test_images": 3,
+  "n_val_images": 3,
+  "precision": 0.007352941176470588,
+  "recall": 0.25,
+  "f1": 0.014285714285714287,
+  "map50": 0.12375,
+  "map50_95": 0.06187499999999999,
   "definitions": {
     "recall": "Of all real defect boxes, the fraction detected.",
     "precision": "Of all predicted boxes, the fraction that match a real defect.",
@@ -21,22 +21,22 @@
   "threshold_file_status": "EXAMPLE",
   "training_loop_validation": {
     "split": "val",
-    "n_images": 1,
+    "n_images": 3,
     "epochs": 5,
-    "precision": 0.04167,
-    "recall": 1.0,
-    "map50": 0.06633,
-    "map50_95": 0.00663,
+    "precision": 0.00794,
+    "recall": 0.5,
+    "map50": 0.27528,
+    "map50_95": 0.04685,
     "source": "outputs/training/yolov8/results.csv",
-    "note": "Computed by Ultralytics on the validation image during training. Not a test-set result."
+    "note": "Computed by Ultralytics on the validation split during training. Not a test-set result."
   },
   "speed_ms": {
-    "preprocess": 0.10646999999153195,
-    "inference": 19.402587000058702,
-    "loss": 0.001485000211687293,
-    "postprocess": 0.6060139999135572
+    "preprocess": 0.12682933341541988,
+    "inference": 12.12008533335999,
+    "loss": 0.000492000102288633,
+    "postprocess": 0.5936600000495673
   },
   "confusion_matrix": null,
-  "confusion_note": "A class confusion matrix is not reported. With one test image the Ultralytics matrix at a very low confidence is dominated by near-zero-score boxes and does not describe operating-point errors. Use outputs/threshold_analysis.csv for false positives and false negatives at each threshold.",
+  "confusion_note": "A class confusion matrix is not reported. The Ultralytics matrix at a very low confidence is dominated by near-zero-score boxes and does not describe operating-point errors. Use outputs/threshold_analysis.csv for false positives and false negatives at each threshold.",
   "note": "These figures are from this repository's test split only. They are not the resume reference targets."
 }

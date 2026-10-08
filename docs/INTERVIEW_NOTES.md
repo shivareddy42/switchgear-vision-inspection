@@ -6,13 +6,13 @@ The short answers below are the ones to give. The counts are the ones in this re
 
 Industrial defect data is difficult to obtain publicly. The prototype therefore uses a documented combination of publicly available industrial surface/welding datasets and publicly accessible imagery where licensing permits. Every source is tracked in sources.csv. Before a real deployment I would replace/extend that with plant-owned labeled imagery.
 
-In this repo that combination is concrete. Twelve Wikimedia Commons files were downloaded on 2026-10-08. Seven are hand-labeled corrosion (a rusty plate, two filiform photos, rusted nails, a pitted pump, a pitted pewter plate, a corroded valve). Five are unlabeled context (switchgear, busbars, a panel, weld distortion, a spatter-removal photo) because they did not show one of the seven defects. NEU-DET, GC10-DET, KolektorSDD2, MVTec AD, RIAWELC, and LoHi-WELD were reviewed and not copied in: missing license, a form gate, radiographs, or no redistribution grant. A Kaggle weld set tagged CC0 was downloaded for inspection (2,028 JPEGs) and then excluded after a porosity-named file showed a Shutterstock watermark.
+In this repo that combination is concrete. Twenty-seven Wikimedia Commons files were downloaded on 2026-10-08, including a second Commons search the same day. Twenty-two are hand-labeled: scratch 1 (a steel pedal), dent 2 (cans and a field gate), weld crack 2 (a bead and a NASA vane), corrosion 17 (the first seven plate, paint, nails, pump, pewter, and valve photos, plus ten industrial pipe, bolt, coupon, and beam photos). Five older domain photos stay unlabeled (switchgear, busbars, a panel, weld distortion, a spatter-removal photo) because they did not show one of the seven defects. Weld porosity, misaligned busbar, and missing or loose component still have no image. NEU-DET, GC10-DET, KolektorSDD2, MVTec AD, RIAWELC, and LoHi-WELD were reviewed and not copied in: missing license, a form gate, radiographs, or no redistribution grant. A Kaggle weld set tagged CC0 was downloaded for inspection (2,028 JPEGs) and then excluded after a porosity-named file showed a Shutterstock watermark. This pass did not add it.
 
 ## Why augment?
 
 Public data does not capture every shop-floor lighting, focus and camera-placement condition. Training augmentation simulates moderate changes in brightness, contrast, blur, noise, orientation and scale. Validation/test data remain untouched.
 
-The training presentations were 5 epochs times 5 images, so 25, with the mild limits in `configs/train.yaml`. The preview grid uses Albumentations so the boxes can be checked. Augmentation did not add scratch, dent, porosity, crack, busbar, or missing-part examples. Those classes have zero labels.
+The training presentations were 5 epochs times 16 images, so 80, with the mild limits in `configs/train.yaml`. The preview grid uses Albumentations on `Metal_Dented_Defect.jpg` so the boxes can be checked. Augmentation did not add weld porosity, a misaligned busbar, or a missing fastener. Those three classes still have zero labels.
 
 ## Why YOLOv8?
 
@@ -34,13 +34,13 @@ In code, FAIL requires confidence strictly greater than the class threshold. Equ
 
 Validation curves plus business risk. For severe defects like weld cracks or missing components I may accept more false alarms to reduce missed defects.
 
-`configs/thresholds.yaml` is marked EXAMPLE (scratch and dent 0.55, porosity and busbar 0.45, crack and missing component 0.40, corrosion and the default 0.50). `scripts/analyze_thresholds.py` sweeps 0.10 through 0.90 on `outputs/val_predictions.json`. On this data every score is far below 0.10, so the sweep shows a missed corrosion box and zero false positives, and it says false reject is not estimable because there is no confirmed-good image. That is a data limit, not a tuned operating point.
+`configs/thresholds.yaml` is marked EXAMPLE (scratch and dent 0.55, porosity and busbar 0.45, crack and missing component 0.40, corrosion and the default 0.50). `scripts/analyze_thresholds.py` sweeps 0.10 through 0.90 on `outputs/val_predictions.json`. On the 3 validation images every threshold from 0.10 through 0.90 misses all 4 labeled boxes (2 dent, 2 corrosion) and records zero false positives. It says false reject is not estimable because there is no confirmed-good image. That is a data limit, not a tuned operating point.
 
 ## How did you handle limited data?
 
 Transfer learning, careful source collection, deduplication, realistic augmentation, monitoring per-class recall, and avoiding leakage between train/test.
 
-Transfer learning started from `yolov8n.pt`. Sources are listed with licenses. Exact SHA-256 and an 8×8 difference hash (6-bit near-duplicate rule) run before the split. The split of the 7 originals is 5/1/1, seed 42, and validation reported no cross-split duplicates. Per-class recall is empty for six classes because there are no boxes to score. I did not paper over that with synthetic defects.
+Transfer learning started from `yolov8n.pt`. Sources are listed with licenses. Exact SHA-256 and an 8×8 difference hash (6-bit near-duplicate rule) run before the split. The split of the 22 labeled originals is 16/3/3, seed 42, and validation reported no cross-split duplicates. Per-class recall is empty for weld porosity, misaligned busbar, and missing or loose component because there are no boxes to score. I did not paper over that with synthetic defects.
 
 ## How would you improve it with real plant data?
 

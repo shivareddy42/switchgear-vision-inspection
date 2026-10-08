@@ -10,7 +10,7 @@ Public detection data exists. NEU-DET includes a scratches class (300 of the 1,8
 
 Annotation is moderate. The box should touch the visible mark, not the whole panel. Grinding lay, die lines, and seams look similar.
 
-No image in this repository is labeled scratch.
+One image is labeled scratch: `Close up of scratches from adjustable spanner.jpg` (CC BY-SA 2.5, Sam Wilson). The box is the scratch cluster on a steel bicycle pedal. It is not an enclosure. Seamless scratched textures were still rejected.
 
 ## dent
 
@@ -20,7 +20,7 @@ Public close-ups of dents on industrial enclosures are scarce. The MVTec AD pape
 
 Annotation is harder than a scratch because the edge is soft. A tight box around the deformed region is still required.
 
-No image in this repository is labeled dent.
+Two images are labeled dent. `Metal Dented Defect.jpg` (CC0) has a box on each of two dented metal cans. `Dented field gates` (CC BY-SA 2.0) has a box on each of two bent gate rails. `Weld-def-1.jpg` is still unlabeled weld distortion. `USS Missouri Dented Rail.jpg` was reviewed and not stored: the rail looks bent, and a person stands in front of it.
 
 ## weld_porosity
 
@@ -30,23 +30,23 @@ RIAWELC has a porosity class, but the images are radiographs and the README does
 
 Annotation is moderate when the pits are in the photo. The box covers the porous patch, not the whole bead. A crater or slag island is not porosity.
 
-No image in this repository is labeled weld_porosity.
+No image in this repository is labeled weld_porosity. A second Commons search on 2026-10-08 did not find pores in a weld bead under a license that allows storing the file. `File:Porosity.jpg` is holes in a flat sheet. `File:Cast porosity defect.jpg` is casting. `Category:Porosity` is soil and materials figures. Those were not mapped.
 
 ## weld_crack
 
 A weld crack is a sharp break in or beside the bead: longitudinal, transverse, or at the toe. It is a weld defect. Undercut and lack of fusion can look similar in a single photo.
 
-The same sources as porosity were reviewed. RIAWELC cracks are radiographic. The Kaggle/Hugging Face weld set uses Bad Weld / Good Weld / Defect, which is not a crack class, and it contains stock-watermarked and screenshot files. No Wikimedia photo reviewed here showed a crack clearly enough to box.
+The same sources as porosity were reviewed. RIAWELC cracks are radiographic. The Kaggle/Hugging Face weld set uses Bad Weld / Good Weld / Defect, which is not a crack class, and it contains stock-watermarked and screenshot files. Two Wikimedia photos did show a crack that could be boxed; they are listed below.
 
 Annotation is hard. The box is the crack, not the bead. If the line might be undercut, it is not labeled.
 
-No image in this repository is labeled weld_crack.
+Two images are labeled weld_crack. `Cracks in weld.jpg` (CC0, Zobac) is boxed on the cracked part of a bead. `CRACKS IN WELDS ON VIGV - NARA - 17471187.jpg` is a public-domain NASA photo boxed on the crack in the vane weld. Undercut, a fracture-surface photo, a magnetic-particle image, and an annotated SCC figure were reviewed and not labeled. A NASA injector photo whose caption says cracked weld was not stored because the crack was not visible.
 
 ## corrosion
 
 Corrosion is oxide or under-film attack: red rust, pitting, or filiform tracks under paint. It is a surface defect. It is not weld porosity and not a stain of oil.
 
-This is the only class with images in the repository. Seven photos were downloaded from Wikimedia Commons on 2026-10-08 and boxed by hand:
+Seventeen photos are labeled corrosion. The first seven are:
 
 - rusty steel plate (CC0)
 - filiform corrosion on a painted tailgate (CC BY-SA 4.0)
@@ -56,7 +56,7 @@ This is the only class with images in the repository. Seven photos were download
 - pitted pewter plate (CC BY-SA 4.0)
 - corroded valve winch (CC BY 4.0)
 
-None of them is a switchgear enclosure. Annotation is easy when the rust is obvious and harder when pitting is fine. The boxes cover the visible attacked region.
+A second pass added ten industrial photos: rust pits on a steel water pipe, a pile of badly rusted pipes, a corroded bolt, rusty flange bolts, a corroded pipe, pitted duplex stainless coupons, pipe sections at Chittenden Locks, another rusted bolt, and rusted steel beams on Walnut Street and the Longfellow Bridge. None of them is a switchgear enclosure. The duplex photo has two boxes. The right-hand coupon was left unlabeled because the pits were not clear. Annotation is easy when the rust is obvious and harder when pitting is fine. The boxes cover the visible attacked region.
 
 ## misaligned_busbar
 
@@ -80,4 +80,4 @@ No image in this repository is labeled missing_or_loose_component.
 
 ## What this means
 
-Public data does not support all seven classes. Forcing weld, busbar, or fastener photos into the empty classes would make the metrics look broader than the evidence. The training run below uses the seven corrosion boxes only, and the empty classes stay empty.
+Public data still does not support all seven classes. Weld porosity, misaligned busbar, and missing or loose component stayed empty after the second Commons search. Forcing a seated busbar, a present bolt, or a sheet of holes into those classes would make the metrics look broader than the evidence.

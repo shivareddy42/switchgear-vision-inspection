@@ -1,73 +1,73 @@
 threshold,class_name,precision,recall,false_positives,false_negatives,false_rejects,note
-0.1,all,0.0000,0.0000,0,1,,false reject not estimable: no confirmed-good images in this file
+0.1,all,0.0000,0.0000,0,4,,false reject not estimable: no confirmed-good images in this file
 0.1,scratch,0.0000,0.0000,0,0,,
-0.1,dent,0.0000,0.0000,0,0,,
+0.1,dent,0.0000,0.0000,0,2,,
 0.1,weld_porosity,0.0000,0.0000,0,0,,
 0.1,weld_crack,0.0000,0.0000,0,0,,
-0.1,corrosion,0.0000,0.0000,0,1,,
+0.1,corrosion,0.0000,0.0000,0,2,,
 0.1,misaligned_busbar,0.0000,0.0000,0,0,,
 0.1,missing_or_loose_component,0.0000,0.0000,0,0,,
-0.2,all,0.0000,0.0000,0,1,,false reject not estimable: no confirmed-good images in this file
+0.2,all,0.0000,0.0000,0,4,,false reject not estimable: no confirmed-good images in this file
 0.2,scratch,0.0000,0.0000,0,0,,
-0.2,dent,0.0000,0.0000,0,0,,
+0.2,dent,0.0000,0.0000,0,2,,
 0.2,weld_porosity,0.0000,0.0000,0,0,,
 0.2,weld_crack,0.0000,0.0000,0,0,,
-0.2,corrosion,0.0000,0.0000,0,1,,
+0.2,corrosion,0.0000,0.0000,0,2,,
 0.2,misaligned_busbar,0.0000,0.0000,0,0,,
 0.2,missing_or_loose_component,0.0000,0.0000,0,0,,
-0.3,all,0.0000,0.0000,0,1,,false reject not estimable: no confirmed-good images in this file
+0.3,all,0.0000,0.0000,0,4,,false reject not estimable: no confirmed-good images in this file
 0.3,scratch,0.0000,0.0000,0,0,,
-0.3,dent,0.0000,0.0000,0,0,,
+0.3,dent,0.0000,0.0000,0,2,,
 0.3,weld_porosity,0.0000,0.0000,0,0,,
 0.3,weld_crack,0.0000,0.0000,0,0,,
-0.3,corrosion,0.0000,0.0000,0,1,,
+0.3,corrosion,0.0000,0.0000,0,2,,
 0.3,misaligned_busbar,0.0000,0.0000,0,0,,
 0.3,missing_or_loose_component,0.0000,0.0000,0,0,,
-0.4,all,0.0000,0.0000,0,1,,false reject not estimable: no confirmed-good images in this file
+0.4,all,0.0000,0.0000,0,4,,false reject not estimable: no confirmed-good images in this file
 0.4,scratch,0.0000,0.0000,0,0,,
-0.4,dent,0.0000,0.0000,0,0,,
+0.4,dent,0.0000,0.0000,0,2,,
 0.4,weld_porosity,0.0000,0.0000,0,0,,
 0.4,weld_crack,0.0000,0.0000,0,0,,
-0.4,corrosion,0.0000,0.0000,0,1,,
+0.4,corrosion,0.0000,0.0000,0,2,,
 0.4,misaligned_busbar,0.0000,0.0000,0,0,,
 0.4,missing_or_loose_component,0.0000,0.0000,0,0,,
-0.5,all,0.0000,0.0000,0,1,,false reject not estimable: no confirmed-good images in this file
+0.5,all,0.0000,0.0000,0,4,,false reject not estimable: no confirmed-good images in this file
 0.5,scratch,0.0000,0.0000,0,0,,
-0.5,dent,0.0000,0.0000,0,0,,
+0.5,dent,0.0000,0.0000,0,2,,
 0.5,weld_porosity,0.0000,0.0000,0,0,,
 0.5,weld_crack,0.0000,0.0000,0,0,,
-0.5,corrosion,0.0000,0.0000,0,1,,
+0.5,corrosion,0.0000,0.0000,0,2,,
 0.5,misaligned_busbar,0.0000,0.0000,0,0,,
 0.5,missing_or_loose_component,0.0000,0.0000,0,0,,
-0.6,all,0.0000,0.0000,0,1,,false reject not estimable: no confirmed-good images in this file
+0.6,all,0.0000,0.0000,0,4,,false reject not estimable: no confirmed-good images in this file
 0.6,scratch,0.0000,0.0000,0,0,,
-0.6,dent,0.0000,0.0000,0,0,,
+0.6,dent,0.0000,0.0000,0,2,,
 0.6,weld_porosity,0.0000,0.0000,0,0,,
 0.6,weld_crack,0.0000,0.0000,0,0,,
-0.6,corrosion,0.0000,0.0000,0,1,,
+0.6,corrosion,0.0000,0.0000,0,2,,
 0.6,misaligned_busbar,0.0000,0.0000,0,0,,
 0.6,missing_or_loose_component,0.0000,0.0000,0,0,,
-0.7,all,0.0000,0.0000,0,1,,false reject not estimable: no confirmed-good images in this file
+0.7,all,0.0000,0.0000,0,4,,false reject not estimable: no confirmed-good images in this file
 0.7,scratch,0.0000,0.0000,0,0,,
-0.7,dent,0.0000,0.0000,0,0,,
+0.7,dent,0.0000,0.0000,0,2,,
 0.7,weld_porosity,0.0000,0.0000,0,0,,
 0.7,weld_crack,0.0000,0.0000,0,0,,
-0.7,corrosion,0.0000,0.0000,0,1,,
+0.7,corrosion,0.0000,0.0000,0,2,,
 0.7,misaligned_busbar,0.0000,0.0000,0,0,,
 0.7,missing_or_loose_component,0.0000,0.0000,0,0,,
-0.8,all,0.0000,0.0000,0,1,,false reject not estimable: no confirmed-good images in this file
+0.8,all,0.0000,0.0000,0,4,,false reject not estimable: no confirmed-good images in this file
 0.8,scratch,0.0000,0.0000,0,0,,
-0.8,dent,0.0000,0.0000,0,0,,
+0.8,dent,0.0000,0.0000,0,2,,
 0.8,weld_porosity,0.0000,0.0000,0,0,,
 0.8,weld_crack,0.0000,0.0000,0,0,,
-0.8,corrosion,0.0000,0.0000,0,1,,
+0.8,corrosion,0.0000,0.0000,0,2,,
 0.8,misaligned_busbar,0.0000,0.0000,0,0,,
 0.8,missing_or_loose_component,0.0000,0.0000,0,0,,
-0.9,all,0.0000,0.0000,0,1,,false reject not estimable: no confirmed-good images in this file
+0.9,all,0.0000,0.0000,0,4,,false reject not estimable: no confirmed-good images in this file
 0.9,scratch,0.0000,0.0000,0,0,,
-0.9,dent,0.0000,0.0000,0,0,,
+0.9,dent,0.0000,0.0000,0,2,,
 0.9,weld_porosity,0.0000,0.0000,0,0,,
 0.9,weld_crack,0.0000,0.0000,0,0,,
-0.9,corrosion,0.0000,0.0000,0,1,,
+0.9,corrosion,0.0000,0.0000,0,2,,
 0.9,misaligned_busbar,0.0000,0.0000,0,0,,
 0.9,missing_or_loose_component,0.0000,0.0000,0,0,,

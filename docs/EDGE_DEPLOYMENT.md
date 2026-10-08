@@ -12,4 +12,4 @@ TensorRT is the NVIDIA runtime that builds an engine for a specific GPU. It is t
 
 A Jetson is a small NVIDIA computer mounted at the station. The reasons to put the model there, rather than streaming every frame to a server, are latency, less dependence on the plant network, less bandwidth, images that stay on site, a station that still inspects if the uplink drops, and a cleaner split between the inspection PC and the rest of the OT network.
 
-No Jetson was available. The 42 ms/frame figure is a reference target only. The only timing measured here is CPU: about 19.9 ms of Ultralytics inference on one test image at the evaluation size, and 898.8 ms for a cold `infer.py` call. Neither number is a Jetson benchmark.
+No Jetson was available. The 42 ms/frame figure is a reference target only. The timing measured here is CPU, from `outputs/evaluation_summary.json` on the 3-image test pass: preprocess 0.12682933341541988 ms, inference 12.12008533335999 ms, postprocess 0.5936600000495673 ms. A cold `infer.py` call on `Corroded_Bolt.jpg` was 1029.5 ms, which includes process startup. Neither number is a Jetson benchmark.
