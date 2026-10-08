@@ -156,7 +156,7 @@ def main() -> int:
                 "map50": float(last["metrics/mAP50(B)"]),
                 "map50_95": float(last["metrics/mAP50-95(B)"]),
                 "source": "outputs/training/yolov8/results.csv",
-                "note": "Computed by Ultralytics on the validation image during training. Not a test-set result.",
+                "note": "Computed by Ultralytics on the validation split during training. Not a test-set result.",
             }
     summary = {
         "status": "measured",
@@ -183,10 +183,10 @@ def main() -> int:
         "speed_ms": getattr(metrics, "speed", None),
         "confusion_matrix": None,
         "confusion_note": (
-            "A class confusion matrix is not reported. With one test image the Ultralytics "
-            "matrix at a very low confidence is dominated by near-zero-score boxes and does not "
-            "describe operating-point errors. Use outputs/threshold_analysis.csv for false positives "
-            "and false negatives at each threshold."
+            "A class confusion matrix is not reported. The Ultralytics matrix at a very low "
+            "confidence is dominated by near-zero-score boxes and does not describe operating-point "
+            "errors. Use outputs/threshold_analysis.csv for false positives and false negatives at "
+            "each threshold."
         ),
         "note": (
             "These figures are from this repository's test split only. "
