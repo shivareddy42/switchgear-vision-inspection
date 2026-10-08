@@ -1,0 +1,29 @@
+# Synthetic-domain smoke training. Not plant performance.
+# Not the resume target of mAP@0.5 around 0.93.
+# Horizontal flip is off: misaligned_busbar and missing_or_loose_component
+# change meaning when the cabinet is mirrored.
+model: yolov8n.pt
+epochs: 1
+batch: 8
+imgsz: 320
+device: cpu
+workers: 0
+patience: 1
+seed: 42
+optimizer: AdamW
+lr: 0.001
+confidence_threshold: 0.50
+iou_threshold: 0.50
+mosaic: 0.0
+mixup: 0.0
+copy_paste: 0.0
+degrees: 8.0
+translate: 0.05
+scale: 0.10
+shear: 2.0
+perspective: 0.0005
+fliplr: 0.0
+flipud: 0.0
+hsv_h: 0.01
+hsv_s: 0.30
+hsv_v: 0.25

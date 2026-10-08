@@ -6,6 +6,8 @@ The resume numbers (about 6,800 training images, mAP@0.5 around 0.93, rare-defec
 
 What this repo did measure is a 27-image public set, 22 labeled photos (scratch 1, dent 2, weld crack 2, corrosion 17), a 16/3/3 split, a 5-epoch CPU run of YOLOv8n, and a test mAP@0.5 of 0.12375 on 3 images. That is a method demo, not a plant model.
 
+`data/synthetic/` is a separate procedural set: 100 drawn enclosures per class, 700 unique images, split 490/105/105 with seed 42. Those renders are not factory photographs, they are not mixed into the Wikimedia split, and they are not the 6,800-image reference target. A 1-epoch CPU smoke on that validation split recorded precision 0.00197, recall 0.50476, mAP@0.5 0.2585, and mAP@0.5:0.95 0.16596 (`outputs/training/yolov8_synthetic/results.csv`). That is synthetic-domain only. It is not a reproduced 0.93 mAP.
+
 ## 1. Problem
 
 A switchgear enclosure can leave the station with a scratch, a dent, porosity or a crack in a weld, corrosion, a busbar that is not seated, or a fastener that is missing. A human walk-around is slow and uneven. A camera can flag the station, but only if the model can say what the defect is and where it is, and only if the threshold matches the cost of a miss versus a false reject.
@@ -44,7 +46,7 @@ Every candidate is a row in `data/sources.csv`, with the URL that was actually o
 | 5 | misaligned_busbar | 1 busbar photo, unlabeled |
 | 6 | missing_or_loose_component | 1 panel photo, unlabeled |
 
-`docs/DATA_STRATEGY.md` says what each class looks like and why the empty ones stayed empty.
+`docs/DATA_STRATEGY.md` says what each class looks like and why the empty photo classes stayed empty. The table above is the Wikimedia set only. The procedural set in `data/synthetic/` has 100 images in every class, including the three classes with no public photo. Those 700 renders are not additional factory images.
 
 ## 6. Cleaning and deduplication
 
@@ -66,7 +68,7 @@ The policy is factory lighting, focus, vibration, sensor noise, a slightly skewe
 
 Training saw 80 presentations (5 epochs × 16 images) under `configs/train.yaml`. The preview command draws the Albumentations version of that policy, which is what was checked visually. On `Metal_Dented_Defect.jpg` both boxes stayed at `(0.24, 0.45, 0.32, 0.34)` and `(0.74, 0.42, 0.32, 0.40)` under brightness, blur, and noise. Rotation and perspective moved them. The combined panel, which flips, moved the centers to about `0.82` and `0.27`.
 
-Augmentation does not replace real rare-defect examples. Weld porosity, busbar misalignment, and missing hardware still have no labels. Oversampling and class weights are not a substitute. Plant images are required before deployment.
+Augmentation does not replace real rare-defect examples. On the Wikimedia photos, weld porosity, busbar misalignment, and missing hardware still have no labels. The procedural renders in `data/synthetic/` draw those classes, and they stay in their own split. Oversampling and class weights are not a substitute. Plant images are required before deployment.
 
 ## 10. Why YOLOv8
 
@@ -118,7 +120,8 @@ SQLAlchemy models in `db/models.py`. Default URL is SQLite at `outputs/inspectio
 
 ## 18. Limitations
 
-- Weld porosity, misaligned busbar, and missing hardware still have no image. Scratch, dent, and weld crack have one or two photos, and they are not enclosures.
+- On the Wikimedia photos, weld porosity, misaligned busbar, and missing hardware still have no image. Scratch, dent, and weld crack have one or two photos, and they are not enclosures.
+- `data/synthetic/` draws 100 enclosures per class (700 unique, split 490/105/105). That count is procedural. It is not the resume target of about 6,800 factory images, and a metric on it is not 0.93 mAP.
 - The corrosion photos are pipe, bolts, beams, coupons, a plate, a tailgate, nails, a pump, pewter, and a valve. They are not switchgear enclosures.
 - Test and validation are 3 images each. Test mAP@0.5 0.12375 and validation mAP@0.5 0.27528 are not comparable to 0.93.
 - False reject is not estimable.
@@ -147,6 +150,10 @@ python scripts/split_dataset.py --seed 42 --train 0.70 --val 0.15 --test 0.15
 python scripts/validate_dataset.py
 python scripts/dataset_stats.py
 
+python scripts/synthesize_enclosures.py --per-class 100 --seed 42
+# writes data/synthetic/ and outputs/synthetic_enclosure_preview.jpg
+# does not touch data/train, data/val, or data/test
+
 python scripts/preview_augmentations.py \
     --image data/train/images/Metal_Dented_Defect.jpg \
     --labels data/train/labels/Metal_Dented_Defect.txt \
@@ -154,6 +161,9 @@ python scripts/preview_augmentations.py \
 
 python train.py --config configs/train.yaml
 python evaluate.py --weights outputs/training/yolov8/weights/best.pt --device cpu
+
+# Optional synthetic-domain smoke. Does not replace the Wikimedia checkpoint.
+python train.py --config configs/train_synthetic.yaml --data configs/data_synthetic.yaml --run-name yolov8_synthetic
 python scripts/analyze_thresholds.py
 
 python infer.py --image data/test/images/Corroded_Bolt.jpg --weights outputs/training/yolov8/weights/best.pt --device cpu

@@ -39,4 +39,12 @@ At the example confidence thresholds, `infer.py` on `Corroded_Bolt.jpg` returned
 
 ONNX export of the same checkpoint passed `onnx.checker`. ONNX Runtime loaded the graph. The raw head shape is `(1, 11, 2100)`. On the sample image the PyTorch decoder returned no boxes. Raw ONNX output max absolute value was 368.59100341796875 and the mean absolute value was 46.737342834472656. Those are head activations, not a claim that decoded boxes match.
 
-The model is not a plant inspection model. It was trained on 16 public photos. Three classes still have no labels, and the photos that do are not switchgear enclosures.
+The model in this section is not a plant inspection model. It was trained on 16 public photos. On that photo set, weld porosity, misaligned busbar, and missing or loose component still have no labels, and the photos that do are not switchgear enclosures.
+
+## Synthetic-domain smoke test
+
+`data/synthetic/` holds 700 procedural enclosure renders, 100 per class, split 490/105/105 before training augmentation. That count is not the resume target of about 6,800 factory images. The Wikimedia checkpoint above was not retrained on these renders.
+
+Any number from `outputs/training/yolov8_synthetic/` is a CPU smoke test on drawn images. It is not plant performance and it is not a reproduced mAP@0.5 of 0.93. The command is `python train.py --config configs/train_synthetic.yaml --data configs/data_synthetic.yaml --run-name yolov8_synthetic`.
+
+One epoch, image size 320, batch 8, AdamW, learning rate 0.001, seed 42, CPU, workers 0, horizontal flip off. The single row of `outputs/training/yolov8_synthetic/results.csv` is the validation split of these renders (105 images): precision 0.00197, recall 0.50476, mAP@0.5 0.2585, mAP@0.5:0.95 0.16596. The Wikimedia test mAP@0.5 of 0.12375 was not replaced.

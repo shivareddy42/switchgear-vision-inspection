@@ -1,0 +1,15 @@
+# Procedural enclosures only. Do not point this file at data/train.
+# These renders are not the Wikimedia photos and not the resume target of
+# about 6,800 factory images. A metric from this file is synthetic-domain only.
+path: data/synthetic
+train: splits/train.txt
+val: splits/val.txt
+test: splits/test.txt
+names:
+  0: scratch
+  1: dent
+  2: weld_porosity
+  3: weld_crack
+  4: corrosion
+  5: misaligned_busbar
+  6: missing_or_loose_component
