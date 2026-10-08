@@ -1,0 +1,42 @@
+{
+  "status": "measured",
+  "metrics_reproduced": true,
+  "weights": "outputs/training/yolov8/weights/best.pt",
+  "split": "test",
+  "device": "cpu",
+  "nms_iou": 0.5,
+  "n_test_images": 1,
+  "n_val_images": 1,
+  "precision": 0.0,
+  "recall": 0.0,
+  "f1": 0.0,
+  "map50": 0.0,
+  "map50_95": 0.0,
+  "definitions": {
+    "recall": "Of all real defect boxes, the fraction detected.",
+    "precision": "Of all predicted boxes, the fraction that match a real defect.",
+    "false_reject": "A good part called bad. Not estimable unless the split contains confirmed-good images.",
+    "missed_defect_false_accept": "A defective part with no detection above the operating threshold."
+  },
+  "threshold_file_status": "EXAMPLE",
+  "training_loop_validation": {
+    "split": "val",
+    "n_images": 1,
+    "epochs": 5,
+    "precision": 0.04167,
+    "recall": 1.0,
+    "map50": 0.06633,
+    "map50_95": 0.00663,
+    "source": "outputs/training/yolov8/results.csv",
+    "note": "Computed by Ultralytics on the validation image during training. Not a test-set result."
+  },
+  "speed_ms": {
+    "preprocess": 0.10646999999153195,
+    "inference": 19.402587000058702,
+    "loss": 0.001485000211687293,
+    "postprocess": 0.6060139999135572
+  },
+  "confusion_matrix": null,
+  "confusion_note": "A class confusion matrix is not reported. With one test image the Ultralytics matrix at a very low confidence is dominated by near-zero-score boxes and does not describe operating-point errors. Use outputs/threshold_analysis.csv for false positives and false negatives at each threshold.",
+  "note": "These figures are from this repository's test split only. They are not the resume reference targets."
+}

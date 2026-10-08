@@ -1,0 +1,18 @@
+# YOLO dataset. Paths are relative to this file's directory when Ultralytics
+# resolves them, so `path` is the repository data directory via an absolute
+# path written by train.py... Ultralytics joins path with train/val/test.
+# Keep path as the data directory relative to the repo root; train.py passes
+# this file and Ultralytics treats relative paths as relative to the yaml.
+# Resolved from the repository root. train.py changes to that directory first.
+path: data
+train: train/images
+val: val/images
+test: test/images
+names:
+  0: scratch
+  1: dent
+  2: weld_porosity
+  3: weld_crack
+  4: corrosion
+  5: misaligned_busbar
+  6: missing_or_loose_component

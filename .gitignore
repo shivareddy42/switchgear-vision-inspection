@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ultralytics/
+runs/
+outputs/predictions/
+outputs/inspections.sqlite
+outputs/evaluation/
+outputs/training/yolov8/*.jpg
+outputs/training/yolov8/*.png
+outputs/training/yolov8/weights/last.pt
+**/*.cache
+*.onnx
+yolov8n.pt
+yolov8s.pt
+.DS_Store

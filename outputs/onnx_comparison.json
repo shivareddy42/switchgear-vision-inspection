@@ -1,0 +1,19 @@
+{
+  "weights": "outputs/training/yolov8/weights/best.pt",
+  "onnx": "/workspace/switchgear-vision-inspection/outputs/training/yolov8/weights/best.onnx",
+  "onnx_checker": "ok",
+  "imgsz": 320,
+  "onnxruntime": "available",
+  "sample_image": "/workspace/switchgear-vision-inspection/data/sample/rusty_steel_plate_preview.jpg",
+  "onnx_output_shapes": [
+    [
+      1,
+      11,
+      2100
+    ]
+  ],
+  "pytorch_boxes": [],
+  "note": "ONNX Runtime consumed the exported graph. Raw ONNX heads are not the same tensor as Ultralytics' decoded boxes, so this report records shapes and the PyTorch boxes rather than a fake box-level equality claim. max_abs on the raw output is included.",
+  "raw_output_max_abs": 361.7239990234375,
+  "raw_output_mean_abs": 43.6280403137207
+}

@@ -1,0 +1,12 @@
+# EXAMPLE values. Not calibrated on plant validation data or on this
+# repository's tiny public split. Do not treat them as an operating point.
+status: EXAMPLE
+default_confidence_threshold: 0.50
+per_class:
+  scratch: 0.55
+  dent: 0.55
+  weld_porosity: 0.45
+  weld_crack: 0.40
+  corrosion: 0.50
+  misaligned_busbar: 0.45
+  missing_or_loose_component: 0.40

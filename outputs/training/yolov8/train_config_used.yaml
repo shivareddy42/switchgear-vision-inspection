@@ -1,0 +1,29 @@
+# CPU baseline. yolov8s is the preferred start when a GPU is available.
+# yolov8n is used here because this build machine has no CUDA device.
+model: yolov8n.pt
+epochs: 5
+batch: 4
+imgsz: 320
+device: cpu
+workers: 0
+patience: 5
+seed: 42
+optimizer: AdamW
+lr: 0.001
+confidence_threshold: 0.50
+iou_threshold: 0.50
+# Mild geometric policy. Mosaic, mixup, and copy-paste are off: they are not
+# a physical camera effect and they invent object layouts.
+mosaic: 0.0
+mixup: 0.0
+copy_paste: 0.0
+degrees: 8.0
+translate: 0.05
+scale: 0.10
+shear: 2.0
+perspective: 0.0005
+fliplr: 0.5
+flipud: 0.0
+hsv_h: 0.01
+hsv_s: 0.30
+hsv_v: 0.25
