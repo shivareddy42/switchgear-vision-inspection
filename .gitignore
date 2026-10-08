@@ -10,6 +10,9 @@ outputs/evaluation/
 outputs/training/yolov8/*.jpg
 outputs/training/yolov8/*.png
 outputs/training/yolov8/weights/last.pt
+outputs/training/yolov8_synthetic/*.jpg
+outputs/training/yolov8_synthetic/*.png
+outputs/training/yolov8_synthetic/weights/last.pt
 **/*.cache
 *.onnx
 yolov8n.pt

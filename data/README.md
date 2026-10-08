@@ -15,3 +15,5 @@
 `sources.csv` is the source register. `source_manifest.csv` is the download list. `download_log.csv` is what the collector actually did. `splits.csv` records the split.
 
 Do not add augmented copies here and then split them. That leaks.
+
+`synthetic/` is not part of the Wikimedia split. It holds 700 procedural enclosures, 100 per class, split 490/105/105 with seed 42. Every row in `synthetic/manifest.csv` is marked `domain=synthetic`. Those counts are not the resume target of about 6,800 factory images.

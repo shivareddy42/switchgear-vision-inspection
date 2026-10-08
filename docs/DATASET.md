@@ -78,8 +78,30 @@ The training run saw each of the 16 training images once per epoch for 5 epochs:
 
 The preview grid is Albumentations, not the Ultralytics loader. It uses `data/train/images/Metal_Dented_Defect.jpg`. Brightness, blur, and noise left both boxes at `(0.24, 0.45, 0.32, 0.34)` and `(0.74, 0.42, 0.32, 0.40)`. Rotation and perspective moved them. The combined panel, which flips, moved the centers to about `0.82` and `0.27`. The two implementations follow one policy and are not pixel-identical.
 
-Augmentation does not create weld porosity, a misaligned busbar, or a missing fastener. Those classes are still empty. Factory images are required before any deployment claim.
+Augmentation does not create weld porosity, a misaligned busbar, or a missing fastener. Those classes are still empty in the Wikimedia split. The procedural set below draws them. Factory images are required before any deployment claim.
 
 ## Counts a script will print
 
-`python scripts/dataset_stats.py` prints the 27 cleaned images, the per-class box counts, and the 16/3/3 split. It does not multiply by an augmentation factor.
+`python scripts/dataset_stats.py` prints the 27 cleaned images, the per-class box counts, and the 16/3/3 split. It does not multiply by an augmentation factor. It does not count `data/synthetic/`.
+
+## Procedural enclosures
+
+`scripts/synthesize_enclosures.py` draws switchgear-style cabinets with numpy, OpenCV, and Pillow. Each image is one class. The YOLO box is the bounding rectangle of the defect mask drawn in that image. Copyrighted catalogs were not copied.
+
+The run on 2026-10-08 used `--per-class 100 --seed 42` and wrote 700 unique JPEGs under `data/synthetic/images/`. Every row in `data/synthetic/manifest.csv` has `domain=synthetic`. The Wikimedia files were left where they were. They are not in this split.
+
+| Class | Images | Train | Val | Test |
+| --- | --- | --- | --- | --- |
+| scratch | 100 | 70 | 15 | 15 |
+| dent | 100 | 70 | 15 | 15 |
+| weld_porosity | 100 | 70 | 15 | 15 |
+| weld_crack | 100 | 70 | 15 | 15 |
+| corrosion | 100 | 70 | 15 | 15 |
+| misaligned_busbar | 100 | 70 | 15 | 15 |
+| missing_or_loose_component | 100 | 70 | 15 | 15 |
+
+The split is 490 / 105 / 105. It was applied to these originals before any training augmentation. Each image has one generation seed, and that seed is in only one split.
+
+These 700 renders are not the resume target of about 6,800 factory images. A metric computed on them is not a reproduced 0.93 mAP and is not plant performance.
+
+The labeled grid is `outputs/synthetic_enclosure_preview.jpg`.

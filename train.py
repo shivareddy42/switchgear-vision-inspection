@@ -24,24 +24,49 @@ if str(ROOT) not in sys.path:
 def _count_images(path: Path) -> int:
     if not path.exists():
         return 0
+    if path.is_file() and path.suffix == ".txt":
+        return sum(1 for line in path.read_text(encoding="utf-8").splitlines() if line.strip())
     return sum(1 for item in path.iterdir() if item.suffix.lower() in {".jpg", ".jpeg", ".png", ".bmp", ".webp"})
+
+
+def _split_counts(data_yaml: Path) -> tuple[int, int, str]:
+    data = yaml.safe_load(data_yaml.read_text(encoding="utf-8"))
+    root = ROOT / str(data["path"])
+    train_images = _count_images(root / str(data["train"]))
+    val_images = _count_images(root / str(data["val"]))
+    return train_images, val_images, str(data["path"])
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Train YOLOv8.")
     parser.add_argument("--config", default="configs/train.yaml")
+    parser.add_argument("--data", default="configs/data.yaml")
+    parser.add_argument("--run-name", default="yolov8")
     args = parser.parse_args()
     os.chdir(ROOT)
     config_path = ROOT / args.config
     config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
-    train_images = _count_images(ROOT / "data" / "train" / "images")
-    val_images = _count_images(ROOT / "data" / "val" / "images")
+    data_path = ROOT / args.data
+    train_images, val_images, dataset_path = _split_counts(data_path)
+    synthetic = "synthetic" in dataset_path
+    if synthetic and args.run_name == "yolov8":
+        print(
+            "Refusing to write a synthetic-domain run over outputs/training/yolov8. "
+            "Pass --run-name yolov8_synthetic."
+        )
+        return 1
     if train_images == 0 or val_images == 0:
         print(
-            "Refusing to train: data/train/images or data/val/images is empty. "
+            f"Refusing to train: {dataset_path} train or val is empty. "
             "Split labeled originals first. No metric will be invented."
         )
         return 1
+    if synthetic:
+        print(
+            "Synthetic-domain training only. These images are procedural renders, "
+            "not factory photographs, and any metric from this run is not plant "
+            "performance and is not the 0.93 reference target."
+        )
     import torch
     from ultralytics import YOLO
 
@@ -50,13 +75,13 @@ def main() -> int:
         print(f"CUDA is not available. Overriding device {device!r} to cpu.")
         device = "cpu"
     print(f"torch {torch.__version__} cuda {torch.cuda.is_available()} device {device}")
-    print(f"train_images {train_images} val_images {val_images} model {config['model']}")
+    print(f"train_images {train_images} val_images {val_images} model {config['model']} data {args.data}")
     model = YOLO(config["model"])
-    run_dir = ROOT / "outputs" / "training" / "yolov8"
+    run_dir = ROOT / "outputs" / "training" / args.run_name
     if run_dir.exists():
         shutil.rmtree(run_dir)
     model.train(
-        data=str(ROOT / "configs" / "data.yaml"),
+        data=str(data_path),
         epochs=int(config["epochs"]),
         batch=min(int(config["batch"]), train_images),
         imgsz=int(config["imgsz"]),
@@ -82,7 +107,7 @@ def main() -> int:
         erasing=0.0,
         auto_augment=None,
         project=str(ROOT / "outputs" / "training"),
-        name="yolov8",
+        name=args.run_name,
         exist_ok=True,
         pretrained=True,
         plots=True,
