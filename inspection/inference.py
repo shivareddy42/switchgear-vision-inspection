@@ -15,8 +15,6 @@ from inspection.labels import yolo_to_xyxy
 
 MOCK_MODEL_VERSION = "mock-demo"
 MOCK_NOTE = "MOCK detection. This is not model inference."
-DETECTOR_CONFIDENCE_FLOOR = 0.001
-
 
 def draw_detections(image: np.ndarray, detections: list[Detection], mock: bool) -> np.ndarray:
     canvas = image.copy()
@@ -79,7 +77,8 @@ class Inspector:
             mock = True
             model_version = MOCK_MODEL_VERSION
         else:
-            detections = self._yolo(image)
+            operating_floor = min([float(default), *[float(v) for v in per_class.values()]])
+            detections = self._yolo(image, conf=max(0.001, operating_floor))
             mock = False
             model_version = self.model_version
 
@@ -99,15 +98,14 @@ class Inspector:
             "decision": decision,
         }
 
-    def _yolo(self, image: np.ndarray) -> list[Detection]:
-        # Keep the detector floor below every practical operating threshold.
-        # The separate decision layer owns PASS/FAIL policy. Relying on
-        # Ultralytics' default conf=0.25 would silently discard candidates if a
-        # future quality policy selected a lower per-class threshold.
+    def _yolo(self, image: np.ndarray, conf: float) -> list[Detection]:
+        # Ask YOLO for every candidate that could possibly cross an operating
+        # threshold. This avoids Ultralytics' default conf=0.25 becoming a hidden
+        # policy while also avoiding thousands of near-zero boxes in output.
         results = self.model.predict(
             source=image,
             device=self.device,
-            conf=DETECTOR_CONFIDENCE_FLOOR,
+            conf=float(conf),
             verbose=False,
         )
         detections: list[Detection] = []
