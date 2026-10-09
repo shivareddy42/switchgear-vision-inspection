@@ -1,0 +1,124 @@
+{
+  "domain": "synthetic-domain",
+  "disclaimer": "Metrics are measured on the held-out synthetic test split (105 procedural shop-inspection images, generator shop-inspect-1.0.0). They are not plant performance. Validation scores from training are not test results.",
+  "generator_version": "shop-inspect-1.0.0",
+  "model": "yolov8s.pt",
+  "weights": "/cursor/stores/self/training-shop/best.pt",
+  "training_device": "mps",
+  "evaluation_device": "cpu",
+  "epochs_completed": 40,
+  "imgsz": 640,
+  "seed": 42,
+  "split": "test",
+  "test_images": 105,
+  "precision": 0.983909,
+  "recall": 0.982588,
+  "f1": 0.983248,
+  "map50": 0.993238,
+  "map50_95": 0.878102,
+  "metric_definitions": {
+    "precision": "Mean of per-class precision at each class's max-F1 confidence on the synthetic test split.",
+    "recall": "Mean of per-class recall at each class's max-F1 confidence on the synthetic test split.",
+    "f1": "Harmonic mean of the precision and recall fields above.",
+    "map50": "Mean average precision at IoU 0.50 on the synthetic test split.",
+    "map50_95": "Mean average precision averaged over IoU 0.50:0.95 on the synthetic test split.",
+    "threshold_sweep": "Class-aware greedy matching at IoU 0.50. Predictions use NMS IoU 0.70 and a confidence floor of 0.10, then each threshold keeps boxes at or above that confidence. scope=all rows are micro counts."
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "class_name": "scratch",
+      "precision": 0.9845,
+      "recall": 1.0,
+      "f1": 0.99219,
+      "ap50": 0.995,
+      "ap50_95": 0.987462,
+      "instances": 31,
+      "images": 31
+    },
+    {
+      "class_id": 1,
+      "class_name": "dent",
+      "precision": 0.963266,
+      "recall": 1.0,
+      "f1": 0.981289,
+      "ap50": 0.995,
+      "ap50_95": 0.951238,
+      "instances": 32,
+      "images": 32
+    },
+    {
+      "class_id": 2,
+      "class_name": "weld_porosity",
+      "precision": 0.991333,
+      "recall": 1.0,
+      "f1": 0.995648,
+      "ap50": 0.995,
+      "ap50_95": 0.824094,
+      "instances": 26,
+      "images": 26
+    },
+    {
+      "class_id": 3,
+      "class_name": "weld_crack",
+      "precision": 0.967351,
+      "recall": 0.987895,
+      "f1": 0.977516,
+      "ap50": 0.994032,
+      "ap50_95": 0.702009,
+      "instances": 30,
+      "images": 30
+    },
+    {
+      "class_id": 4,
+      "class_name": "corrosion",
+      "precision": 0.98999,
+      "recall": 1.0,
+      "f1": 0.99497,
+      "ap50": 0.995,
+      "ap50_95": 0.934195,
+      "instances": 30,
+      "images": 30
+    },
+    {
+      "class_id": 5,
+      "class_name": "misaligned_busbar",
+      "precision": 0.990922,
+      "recall": 1.0,
+      "f1": 0.99544,
+      "ap50": 0.995,
+      "ap50_95": 0.912672,
+      "instances": 33,
+      "images": 33
+    },
+    {
+      "class_id": 6,
+      "class_name": "missing_or_loose_component",
+      "precision": 1.0,
+      "recall": 0.890218,
+      "f1": 0.941921,
+      "ap50": 0.983636,
+      "ap50_95": 0.835044,
+      "instances": 34,
+      "images": 34
+    }
+  ],
+  "onnx": {
+    "path": "/cursor/stores/self/training-cloud/best.onnx",
+    "source_weights": "/cursor/stores/self/training-shop/best.pt",
+    "bytes": 44728911,
+    "loads": true,
+    "onnx_checker": true,
+    "onnxruntime_session": true,
+    "dummy_forward_ok": true,
+    "error": null,
+    "input_name": "images",
+    "input_shape": [
+      1,
+      3,
+      640,
+      640
+    ]
+  },
+  "preview": "/cursor/stores/self/media/shop_test_preview.jpg"
+}

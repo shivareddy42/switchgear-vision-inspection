@@ -15,6 +15,7 @@ outputs/training/yolov8_synthetic/*.png
 outputs/training/yolov8_synthetic/weights/last.pt
 **/*.cache
 *.onnx
+!outputs/training/yolov8_shop/best.onnx
 yolov8n.pt
 yolov8s.pt
 .DS_Store

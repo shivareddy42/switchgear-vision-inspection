@@ -8,7 +8,7 @@ Four layers sit next to each other. They are not one dataset and they are not on
 
 1. Wikimedia photos in `data/raw` and the 16/3/3 labeled split. Real photographs, a small set: 27 files, 22 hand-labeled, 5 unlabeled. Most classes have one or two photos or none. The only photo-domain test measurement is mAP@0.5 0.12375 on 3 images.
 2. Diagram renders in `data/synthetic/`. An earlier procedural set, 100 images per class, split 490/105/105. It is not the training target. Its 1-epoch smoke (precision 0.00197, recall 0.50476, mAP@0.5 0.2585, mAP@0.5:0.95 0.16596) stays in `outputs/training/yolov8_synthetic/` and is not a shop or plant result.
-3. Shop-inspect renders in `data/shop/`. The current synthetic training set: 700 images, split 490/105/105, generator `shop-inspect-1.0.0`. `configs/data.yaml` points here. No shop metric is recorded yet.
+3. Shop-inspect renders in `data/shop/`. The current synthetic training set: 700 procedural images, split 490/105/105, generator `shop-inspect-1.0.0`. `configs/data.yaml` points here. The held-out synthetic test (105 images, yolov8s, 40 epochs, trained on MPS, evaluated on CPU) is in `outputs/training/yolov8_shop/`: precision 0.983909, recall 0.982588, F1 0.983248, mAP@0.5 0.993238, mAP@0.5:0.95 0.878102. A high score on these renders does not transfer to plant photos, and it is not the 0.93 reference target.
 4. Resume reference targets (about 6,800 factory images, mAP@0.5 around 0.93, and the rest of that list). Still unmeasured.
 
 ## 1. Problem
@@ -81,11 +81,29 @@ The station needs the defect type and the location. A classifier cannot show the
 
 The photo run was `python train.py --config configs/train.yaml --data configs/data_wikimedia.yaml --run-name yolov8`. It loads `yolov8n.pt` (transfer learning). yolov8s is the better start when a GPU exists. This machine has no CUDA, so the config pins CPU, image size 320, batch 4, 5 epochs, AdamW, learning rate 0.001, seed 42, patience 5. On the Wikimedia validation split, mAP@0.5 in `outputs/training/yolov8/results.csv` stayed at 0.15393 for the first three epochs, rose to 0.27528 at epoch 4, and stayed there at epoch 5.
 
-`configs/data.yaml` now points at `data/shop` for the next train. That run has not been started here. A cloud agent is training separately. When it is scored, the numbers belong in `outputs/training/yolov8_shop/` and stay labeled shop-inspect synthetic, not Wikimedia and not 0.93.
+`configs/data.yaml` points at `data/shop`. That shop-inspect run is already scored and was not trained again here. The checkpoint is `outputs/training/yolov8_shop/weights/best.pt` (yolov8s, 40 epochs, image size 640, seed 42, trained on MPS, evaluated on CPU). The numbers in section 12 stay labeled synthetic-domain shop-inspect. They are not a Wikimedia result and not the reference target of about 0.93.
 
 ## 12. Evaluation
 
-`python evaluate.py` scores the test split.
+Two test measurements are recorded. They are different domains and are not averaged.
+
+### Synthetic-domain shop-inspect
+
+Held-out test of the procedural renders in `data/shop/`, 105 images, yolov8s, 40 epochs, trained on MPS, evaluated on CPU. Source: `outputs/training/yolov8_shop/evaluation_summary.json`. The renders are procedural, and a high score does not transfer to plant photos. This is not the reference target of mAP@0.5 around 0.93.
+
+| Metric | Held-out synthetic test (105 images) |
+| --- | --- |
+| precision | 0.983909 |
+| recall | 0.982588 |
+| F1 | 0.983248 |
+| mAP@0.5 | 0.993238 |
+| mAP@0.5:0.95 | 0.878102 |
+
+Rounded to four decimals, that test is precision 0.9839, recall 0.9826, F1 0.9832, mAP@0.5 0.9932, mAP@0.5:0.95 0.8781. At confidence 0.50 and IoU 0.50, `outputs/training/yolov8_shop/threshold_analysis.csv` records 2 false positives and 4 false negatives. Per-class average precision is in the json. Validation mAP@0.5 was 0.990 (epoch 40 of `outputs/training/yolov8_shop/results.csv` is 0.99071). That validation figure is not this test. ONNX at `outputs/training/yolov8_shop/best.onnx` loads.
+
+### Wikimedia photos
+
+`python evaluate.py` scores the Wikimedia photo test split. It does not score `data/shop`.
 
 | | Test (3 images) | Training-loop validation (3 images) |
 | --- | --- | --- |
@@ -107,7 +125,7 @@ The default is 0.50. A detection fails the part only when its confidence is stri
 
 ## 14. Inference
 
-`infer.py` accepts `--image`, `--dir`, `--video`, and `--webcam` (one frame; if no camera is present it says so). Output is class, box, confidence, PASS/FAIL, latency, and an image under `outputs/predictions/`. `--demo` or `--mock` does not load weights. The overlay reads `MOCK - NOT MODEL INFERENCE`.
+`infer.py` accepts `--image`, `--dir`, `--video`, and `--webcam` (one frame; if no camera is present it says so). Output is class, box, confidence, PASS/FAIL, latency, and an image under `outputs/predictions/`. The default `--weights` path is `outputs/training/yolov8_shop/weights/best.pt`. `--demo` or `--mock` does not load weights. The overlay reads `MOCK - NOT MODEL INFERENCE`, and the model version is `mock-demo`.
 
 The call on `data/test/images/Corroded_Bolt.jpg` returned PASS, zero detections, model version `best`.
 
@@ -127,7 +145,7 @@ SQLAlchemy models in `db/models.py`. Default URL is SQLite at `outputs/inspectio
 
 - On the Wikimedia photos, weld porosity, misaligned busbar, and missing hardware still have no image. Scratch, dent, and weld crack have one or two photos, and they are not enclosures.
 - `data/synthetic/` is the earlier diagram set (700 images, 100 per class). It is not the training target, and its smoke mAP is not a shop or plant result.
-- `data/shop/` is the shop-inspect training set (700 images, split 490/105/105). No shop metric is in this repository yet. That count is not about 6,800 factory images.
+- `data/shop/` is the shop-inspect training set (700 procedural renders, split 490/105/105). The held-out synthetic test mAP@0.5 is 0.993238. That score does not transfer to plant photos. The 700 is not about 6,800 factory images.
 - The corrosion photos are pipe, bolts, beams, coupons, a plate, a tailgate, nails, a pump, pewter, and a valve. They are not switchgear enclosures.
 - Test and validation are 3 images each. Test mAP@0.5 0.12375 and validation mAP@0.5 0.27528 are not comparable to 0.93.
 - False reject is not estimable.
@@ -168,7 +186,7 @@ python scripts/preview_augmentations.py \
 python train.py --config configs/train.yaml --data configs/data_wikimedia.yaml --run-name yolov8
 python evaluate.py --weights outputs/training/yolov8/weights/best.pt --data configs/data_wikimedia.yaml --device cpu
 
-# Next train uses the shop-inspect set. Not started in this change.
+# Shop-inspect weights are already recorded. This command would train again; it was not run for the copied test.
 # python train.py --config configs/train.yaml --data configs/data.yaml --run-name yolov8_shop
 
 # Diagram-set smoke. Does not replace the Wikimedia checkpoint or the shop set.
