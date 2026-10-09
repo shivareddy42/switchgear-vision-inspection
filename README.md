@@ -145,7 +145,7 @@ SQLAlchemy models in `db/models.py`. Default URL is SQLite at `outputs/inspectio
 
 - On the Wikimedia photos, weld porosity, misaligned busbar, and missing hardware still have no image. Scratch, dent, and weld crack have one or two photos, and they are not enclosures.
 - `data/synthetic/` is the earlier diagram set (700 images, 100 per class). It is not the training target, and its smoke mAP is not a shop or plant result.
-- `data/shop/` is the shop-inspect training set (700 procedural renders, split 490/105/105). The held-out synthetic test mAP@0.5 is 0.993238. That score does not transfer to plant photos. The 700 is not about 6,800 factory images.
+- `data/shop/` is the shop-inspect training set (700 procedural renders, split 490/105/105). The held-out synthetic test mAP@0.5 is 0.993238. That score does not transfer to plant photos. The same weights on 67 licensed photographs are in `docs/DOMAIN_GAP.md`. The 700 is not about 6,800 factory images.
 - The corrosion photos are pipe, bolts, beams, coupons, a plate, a tailgate, nails, a pump, pewter, and a valve. They are not switchgear enclosures.
 - Test and validation are 3 images each. Test mAP@0.5 0.12375 and validation mAP@0.5 0.27528 are not comparable to 0.93.
 - False reject is not estimable.
