@@ -1,6 +1,6 @@
 # Model card
 
-## Resume / project reference targets
+## Project-specification reference targets (not reproduced here)
 
 These numbers come from the project description. This repository did not reproduce them.
 
@@ -76,7 +76,7 @@ The model in this section is not a plant inspection model. It was trained on 16 
 
 ### Diagram-set smoke test (`data/synthetic`)
 
-This is the earlier procedural set, not the shop-inspect training target. `data/synthetic/` holds 700 diagram renders, 100 per class, split 490/105/105 before training augmentation. That count is not the resume target of about 6,800 factory images. The Wikimedia checkpoint above was not retrained on these renders.
+This is the earlier procedural set, not the shop-inspect training target. `data/synthetic/` holds 700 diagram renders, 100 per class, split 490/105/105 before training augmentation. That count is not the project-specification target of about 6,800 factory images. The Wikimedia checkpoint above was not retrained on these renders.
 
 Any number from `outputs/training/yolov8_synthetic/` is a CPU smoke test on those diagrams. It is not plant performance, not a shop-inspect result, and not a reproduced mAP@0.5 of 0.93. The command is `python train.py --config configs/train_synthetic.yaml --data configs/data_synthetic.yaml --run-name yolov8_synthetic`.
 
