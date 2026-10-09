@@ -88,7 +88,11 @@ def _existing_hashes(log_path: Path, output_root: Path) -> tuple[set[str], list[
             if image is None:
                 continue
             shas.add(sha256_file(path))
-            hashes.append((str(path.relative_to(ROOT)), dhash_image(image)))
+            try:
+                display_name = str(path.relative_to(ROOT))
+            except ValueError:
+                display_name = str(path)
+            hashes.append((display_name, dhash_image(image)))
 
     return shas, hashes
 
