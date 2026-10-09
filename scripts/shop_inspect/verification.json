@@ -1,0 +1,81 @@
+{
+  "python": "3.12.14",
+  "platform": "macOS-26.6-arm64-arm-64bit",
+  "numpy": "2.5.2",
+  "opencv": "5.0.0",
+  "pillow": "12.3.0",
+  "source_sha256": "602137072a30e85ad93640fa4bc21b349a897ce5538fe794c353629b1d2ae854",
+  "plan_rows_matched": 700,
+  "per_class": [
+    196,
+    197,
+    193,
+    194,
+    195,
+    195,
+    197
+  ],
+  "samples": [
+    {
+      "seed": 0,
+      "image_bytes_match": false,
+      "label_bytes_match": true
+    },
+    {
+      "seed": 1,
+      "image_bytes_match": false,
+      "label_bytes_match": true
+    },
+    {
+      "seed": 2,
+      "image_bytes_match": false,
+      "label_bytes_match": true
+    },
+    {
+      "seed": 3,
+      "image_bytes_match": false,
+      "label_bytes_match": true
+    },
+    {
+      "seed": 4,
+      "image_bytes_match": false,
+      "label_bytes_match": true
+    },
+    {
+      "seed": 5,
+      "image_bytes_match": false,
+      "label_bytes_match": true
+    },
+    {
+      "seed": 6,
+      "image_bytes_match": false,
+      "label_bytes_match": true
+    },
+    {
+      "seed": 7,
+      "image_bytes_match": false,
+      "label_bytes_match": true
+    },
+    {
+      "seed": 8,
+      "image_bytes_match": false,
+      "label_bytes_match": true
+    },
+    {
+      "seed": 9,
+      "image_bytes_match": false,
+      "label_bytes_match": true
+    }
+  ],
+  "scope": "All 700 images and labels regenerated and compared on the recorded platform; original render environment unknown",
+  "full_rebuild": {
+    "images_checked": 700,
+    "workers": 4,
+    "manifest_matches": true,
+    "image_byte_matches": 0,
+    "label_byte_matches": 700,
+    "decoded_mean_absolute_channel_difference": 0.0018186639694940476,
+    "decoded_maximum_channel_difference": 135,
+    "decoded_fraction_pixels_changed": 0.0017570614769345239
+  }
+}

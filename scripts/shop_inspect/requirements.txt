@@ -1,0 +1,4 @@
+# Later plan-check environment; NOT a recovered original render lockfile.
+numpy==2.5.2
+opencv-python-headless==5.0.0.93
+pillow==12.3.0

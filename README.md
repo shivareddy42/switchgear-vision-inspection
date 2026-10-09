@@ -49,6 +49,9 @@ Every public-image source and license note is tracked in `data/sources.csv`. The
 
 See `docs/DATA_STRATEGY.md`, `docs/DATASET.md`, and `docs/DOMAIN_GAP.md`.
 
+The original shop renderer, its portable launcher, and verification commands are
+now included. See [shop generator reproducibility](scripts/shop_inspect/README.md).
+
 ## Augmentation
 
 Augmentation is applied to **training data only**. Validation and test images are left untouched except for deterministic model preprocessing.
