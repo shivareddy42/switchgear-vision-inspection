@@ -11,11 +11,10 @@ factory. They were drawn with a pinhole camera, painted or brushed metal
 shading, and defect masks. They are not frames taken from the licensed
 reference photos, and they are not copies of any catalog or website.
 
-Do **not** report this folder as a 6,800-image factory dataset.
-Do **not** report a 0.93 mAP from these files. The renders here were not
-scored in place. The held-out synthetic-domain test is in `docs/MODEL_CARD.md`
-and `outputs/training/yolov8_shop/`. These renders are procedural, and that
-score does not transfer to plant photos.
+Do **not** treat this folder as a factory dataset or interpret its benchmark as
+plant performance. The held-out synthetic-domain test is documented in
+`docs/MODEL_CARD.md` and `outputs/training/yolov8_shop/`. These renders are
+procedural, and their score does not transfer to plant photos.
 
 ## What the pictures show
 
