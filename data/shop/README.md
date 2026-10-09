@@ -80,15 +80,20 @@ Split counts: train 490, val 105, test 105.
 
 ## Reproducibility note
 
-The committed images, labels, split assignment, and manifest are sufficient to
-re-run training and evaluation on this exact dataset. The original
-`shop-inspect-1.0.0` render generator is **not currently included in this
-public repository**, so the pixels themselves cannot yet be regenerated from
-seed alone.
+The original `shop-inspect-1.0.0` generator is now archived unchanged at
+`scripts/shop_inspect/generate.py`. Its SHA-256 is
+`602137072a30e85ad93640fa4bc21b349a897ce5538fe794c353629b1d2ae854`.
+The portable launcher uses the exported fonts and requires a fresh output
+folder. See [generator instructions](../../scripts/shop_inspect/README.md)
+for regeneration and verification commands, provenance, and environment limits.
 
-A separate, simpler procedural generator is included at
-`scripts/synthesize_enclosures.py`; it produces `data/synthetic/` and is not
-the source of this shop-inspect benchmark.
+The original rendering interpreter, dependency lockfile, and command line were
+not recorded. The supplied environment records a later plan check, not the
+original render. Matching all manifest rows establishes the plan and split;
+it does not establish byte-identical output for all 700 images.
+
+`scripts/synthesize_enclosures.py` produces `data/synthetic/`; it is a separate
+renderer and is not the source of this shop-inspect benchmark.
 
 ## Parameters (shop-inspect-1.0.0)
 
