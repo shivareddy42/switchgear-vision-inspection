@@ -16,4 +16,6 @@
 
 Do not add augmented copies here and then split them. That leaks.
 
-`synthetic/` is not part of the Wikimedia split. It holds 700 procedural enclosures, 100 per class, split 490/105/105 with seed 42. Every row in `synthetic/manifest.csv` is marked `domain=synthetic`. Those counts are not the resume target of about 6,800 factory images.
+`synthetic/` is the earlier diagram set, not the training target. It holds 700 procedural images, 100 per class, split 490/105/105 with seed 42. Every row in `synthetic/manifest.csv` is marked `domain=synthetic`.
+
+`shop/` is the shop-inspect training set, also 700 images and split 490/105/105, copied separately. Every row in `shop/manifest.csv` has `synthetic=true`. `configs/data.yaml` points at `shop/`. Those counts are not the resume target of about 6,800 factory images, and they are not mixed with the Wikimedia metric.

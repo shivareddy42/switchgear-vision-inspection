@@ -1,0 +1,15 @@
+# Shop-inspect renders copied into this repository.
+# Not data/synthetic and not the Wikimedia split.
+# path is relative to the repository root.
+path: data/shop
+train: images/train
+val: images/val
+test: images/test
+names:
+  0: scratch
+  1: dent
+  2: weld_porosity
+  3: weld_crack
+  4: corrosion
+  5: misaligned_busbar
+  6: missing_or_loose_component

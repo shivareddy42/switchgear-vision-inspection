@@ -1,13 +1,12 @@
-# YOLO dataset. Paths are relative to this file's directory when Ultralytics
-# resolves them, so `path` is the repository data directory via an absolute
-# path written by train.py... Ultralytics joins path with train/val/test.
-# Keep path as the data directory relative to the repo root; train.py passes
-# this file and Ultralytics treats relative paths as relative to the yaml.
+# Shop-inspect renders, the current synthetic training set.
+# Not the Wikimedia photos (configs/data_wikimedia.yaml).
+# Not the earlier diagram set (configs/data_synthetic.yaml).
+# Not the resume target of about 6,800 factory images.
 # Resolved from the repository root. train.py changes to that directory first.
-path: data
-train: train/images
-val: val/images
-test: test/images
+path: data/shop
+train: images/train
+val: images/val
+test: images/test
 names:
   0: scratch
   1: dent
