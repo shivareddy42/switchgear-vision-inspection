@@ -11,11 +11,10 @@ factory. They were drawn with a pinhole camera, painted or brushed metal
 shading, and defect masks. They are not frames taken from the licensed
 reference photos, and they are not copies of any catalog or website.
 
-Do **not** report this folder as a 6,800-image factory dataset.
-Do **not** report a 0.93 mAP from these files. The renders here were not
-scored in place. The held-out synthetic-domain test is in `docs/MODEL_CARD.md`
-and `outputs/training/yolov8_shop/`. These renders are procedural, and that
-score does not transfer to plant photos.
+Do **not** treat this folder as a factory dataset or interpret its benchmark as
+plant performance. The held-out synthetic-domain test is documented in
+`docs/MODEL_CARD.md` and `outputs/training/yolov8_shop/`. These renders are
+procedural, and their score does not transfer to plant photos.
 
 ## What the pictures show
 
@@ -79,14 +78,17 @@ Per-class image counts (an image can count toward more than one class):
 
 Split counts: train 490, val 105, test 105.
 
-## Reproduce
+## Reproducibility note
 
-```bash
-python3 generate.py --output /path/to/synthetic-enclosures
-```
+The committed images, labels, split assignment, and manifest are sufficient to
+re-run training and evaluation on this exact dataset. The original
+`shop-inspect-1.0.0` render generator is **not currently included in this
+public repository**, so the pixels themselves cannot yet be regenerated from
+seed alone.
 
-Requires Python 3, numpy, opencv-python-headless, and Pillow. No network
-access and no downloaded photographs.
+A separate, simpler procedural generator is included at
+`scripts/synthesize_enclosures.py`; it produces `data/synthetic/` and is not
+the source of this shop-inspect benchmark.
 
 ## Parameters (shop-inspect-1.0.0)
 

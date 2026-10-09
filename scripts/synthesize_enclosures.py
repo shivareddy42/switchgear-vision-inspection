@@ -2,8 +2,7 @@
 """Procedural switchgear-style metal enclosures.
 
 These images are drawn in code. They are not factory photographs, not the
-Wikimedia set under data/raw, and not the resume target of about 6,800
-annotated factory images. Each file is one class. The YOLO box is the
+Wikimedia set under data/raw, and Each file is one class. The YOLO box is the
 bounding rectangle of the defect mask drawn in that image.
 
 Deterministic for a given --seed, --per-class, and image size. The split
@@ -33,7 +32,7 @@ WIDTH = 640
 HEIGHT = 480
 NOTE = (
     "Procedural render. Not a factory photograph. Not a Wikimedia file. "
-    "Not part of the resume reference target of about 6800 factory images."
+    "Not part of a plant-owned validation dataset."
 )
 
 
