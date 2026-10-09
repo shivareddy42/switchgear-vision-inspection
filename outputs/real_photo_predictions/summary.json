@@ -1,0 +1,1950 @@
+{
+  "weights": "outputs/training/yolov8_shop/weights/best.pt",
+  "device": "cpu",
+  "imgsz": 640,
+  "nms_iou": 0.7,
+  "confidence_floor": 0.25,
+  "note": "Detections are model boxes at or above 0.25 after NMS. Folder names are the existing filing. box_on_defensible_defect is a visual check of the drawn boxes, not a new label. null means that annotated image was not opened box by box.",
+  "image_count": 67,
+  "images_with_a_detection": 56,
+  "images_with_confidence_at_least_0.50": 48,
+  "box_count": 285,
+  "defensible_box_true": 2,
+  "defensible_box_false": 18,
+  "defensible_box_not_reviewed": 47,
+  "images": [
+    {
+      "image": "corrosion/008-geevor-tin-mine-electrical-switchgear.jpg",
+      "annotated": "outputs/real_photo_predictions/corrosion__008-geevor-tin-mine-electrical-switchgear.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.857091
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.603452
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.55145
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.416632
+        },
+        {
+          "class": "dent",
+          "confidence": 0.41083
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.3658
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "dent",
+        "confidence": 0.239609
+      },
+      "box_on_defensible_defect": false,
+      "review": "Filed as corrosion. Drawn boxes are scratch and dent on seams, handles, and shadows. No corrosion box at or above 0.25. I would not defend those boxes as scratches or dents."
+    },
+    {
+      "image": "corrosion/032-really-old-rusty-electrical-cabinet-at-porth-penrhyn-bangor-geograph-org-uk-6261.jpg",
+      "annotated": "outputs/real_photo_predictions/corrosion__032-really-old-rusty-electrical-cabinet-at-porth-penrhyn-bangor-geograph-org-uk-6261.jpg",
+      "detections": [
+        {
+          "class": "corrosion",
+          "confidence": 0.478726
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "corrosion",
+        "confidence": 0.158923
+      },
+      "box_on_defensible_defect": false,
+      "review": "The cabinet is visibly rusty. The only box is corrosion 0.479 on the top rim, not on the rusted face."
+    },
+    {
+      "image": "missing_or_loose_component/030-dornbirn-damaged-distribution-board-01asd.jpg",
+      "annotated": "outputs/real_photo_predictions/missing_or_loose_component__030-dornbirn-damaged-distribution-board-01asd.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.504656
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.486453
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.240326
+      },
+      "box_on_defensible_defect": false,
+      "review": "Broken hardware is visible at the lower left. The drawn boxes are scratches on the upper-right interior, not on that damage, and not missing_or_loose_component."
+    },
+    {
+      "image": "unlabeled/001-electrical-switchgear.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__001-electrical-switchgear.jpg",
+      "detections": [
+        {
+          "class": "corrosion",
+          "confidence": 0.760851
+        },
+        {
+          "class": "dent",
+          "confidence": 0.676466
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "corrosion",
+        "confidence": 0.196247
+      },
+      "box_on_defensible_defect": false,
+      "review": "Corrosion and dent boxes sit on ordinary switch handles and panel hardware."
+    },
+    {
+      "image": "unlabeled/002-high-voltage-switchgear.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__002-high-voltage-switchgear.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.739554
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.709778
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.413
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.295509
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.180003
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/003-4-16kv-switchgear.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__003-4-16kv-switchgear.jpg",
+      "detections": [
+        {
+          "class": "misaligned_busbar",
+          "confidence": 0.734944
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.527889
+        },
+        {
+          "class": "dent",
+          "confidence": 0.488995
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.321142
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.320524
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.258201
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.234703
+      },
+      "box_on_defensible_defect": false,
+      "review": "Misaligned-busbar, corrosion, and dent boxes sit on cabinet faces and switch hardware, not on a shifted busbar."
+    },
+    {
+      "image": "unlabeled/005-substation-busbars-and-breakers.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__005-substation-busbars-and-breakers.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.030359
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/010-6kv-switchgear-geograph-org-uk-3665164.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__010-6kv-switchgear-geograph-org-uk-3665164.jpg",
+      "detections": [
+        {
+          "class": "corrosion",
+          "confidence": 0.715924
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.633253
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.436879
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.413449
+        },
+        {
+          "class": "weld_porosity",
+          "confidence": 0.404171
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.342108
+        },
+        {
+          "class": "weld_porosity",
+          "confidence": 0.301899
+        },
+        {
+          "class": "weld_porosity",
+          "confidence": 0.294317
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "weld_porosity",
+        "confidence": 0.24816
+      },
+      "box_on_defensible_defect": false,
+      "review": "Corrosion and scratch boxes sit on the frame and a dark mark that I would not call corrosion."
+    },
+    {
+      "image": "unlabeled/011-electrical-main-and-distribution-panel-for-480-volt.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__011-electrical-main-and-distribution-panel-for-480-volt.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.870171
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.819163
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.810304
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.686076
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.51967
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.339301
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.266795
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.265238
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.216511
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/012-antique-electrical-switchboard.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__012-antique-electrical-switchboard.jpg",
+      "detections": [
+        {
+          "class": "corrosion",
+          "confidence": 0.695451
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.45784
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.349369
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.257263
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.23746
+      },
+      "box_on_defensible_defect": false,
+      "review": "Corrosion box covers a dark lower section of an antique board. I would not call that region corrosion."
+    },
+    {
+      "image": "unlabeled/013-2500a-copper-busbars-in-motor-control-panel.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__013-2500a-copper-busbars-in-motor-control-panel.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.735189
+        },
+        {
+          "class": "misaligned_busbar",
+          "confidence": 0.68008
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.485558
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.417681
+        },
+        {
+          "class": "weld_crack",
+          "confidence": 0.332417
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.261228
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.248233
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/014-3-phase-ac-sub-bus-bar-001.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__014-3-phase-ac-sub-bus-bar-001.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.914211
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.886264
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.874388
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.864962
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.801186
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.800331
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.746274
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.652529
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.609133
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.602956
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.595381
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.544233
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.45416
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.447306
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.43318
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.416718
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.37996
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.362156
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.350759
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.339887
+        },
+        {
+          "class": "dent",
+          "confidence": 0.265482
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.243712
+      },
+      "box_on_defensible_defect": false,
+      "review": "Missing-component boxes sit on intact busbar supports and insulators."
+    },
+    {
+      "image": "unlabeled/015-rg-estation5powerhouseeatonmagnumdslowvoltageswitchgear.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__015-rg-estation5powerhouseeatonmagnumdslowvoltageswitchgear.jpg",
+      "detections": [
+        {
+          "class": "weld_crack",
+          "confidence": 0.273441
+        },
+        {
+          "class": "misaligned_busbar",
+          "confidence": 0.25054
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "dent",
+        "confidence": 0.240649
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/016-schaltschrank-enclosure.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__016-schaltschrank-enclosure.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.706747
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.562631
+        },
+        {
+          "class": "dent",
+          "confidence": 0.356887
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.290565
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.270074
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.250298
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.210829
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/017-schaltschrank-hg.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__017-schaltschrank-hg.jpg",
+      "detections": [
+        {
+          "class": "weld_crack",
+          "confidence": 0.533293
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.438681
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.151934
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/019-tgbt-armoire-lectrique.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__019-tgbt-armoire-lectrique.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.039943
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/020-trapped-key-interlock-switchgear-door.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__020-trapped-key-interlock-switchgear-door.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.685589
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.633226
+        },
+        {
+          "class": "dent",
+          "confidence": 0.334366
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "corrosion",
+        "confidence": 0.236549
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/021-square-d-electric-switchboard.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__021-square-d-electric-switchboard.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.956513
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.121062
+      },
+      "box_on_defensible_defect": false,
+      "review": "A scratch box at 0.957 covers a meter bezel, not a scratch."
+    },
+    {
+      "image": "unlabeled/022-switchboard-room-in-large-commercial-building-brisbane.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__022-switchboard-room-in-large-commercial-building-brisbane.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.65436
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.63711
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.552293
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.430427
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.271441
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.24299
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/023-testing-switch-gears-in-an-electrical-panel-in-a-newly-energized-power-substatio.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__023-testing-switch-gears-in-an-electrical-panel-in-a-newly-energized-power-substatio.jpg",
+      "detections": [
+        {
+          "class": "corrosion",
+          "confidence": 0.475078
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.460603
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.454126
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.369802
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.353033
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.297506
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.125752
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/024-electrical-panel-in-swiss-industrial-building.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__024-electrical-panel-in-swiss-industrial-building.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.731993
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.714435
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.70626
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.634896
+        },
+        {
+          "class": "weld_crack",
+          "confidence": 0.60764
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.551483
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.529092
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.478373
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.442582
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.399673
+        },
+        {
+          "class": "weld_crack",
+          "confidence": 0.379099
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.364333
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.353618
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.349341
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.322103
+        },
+        {
+          "class": "weld_crack",
+          "confidence": 0.314967
+        },
+        {
+          "class": "weld_crack",
+          "confidence": 0.295982
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.285446
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.273466
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.252841
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.249265
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/025-electrical-panels-at-co-generation-plant-at-maharashtra-india.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__025-electrical-panels-at-co-generation-plant-at-maharashtra-india.jpg",
+      "detections": [
+        {
+          "class": "corrosion",
+          "confidence": 0.501053
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "misaligned_busbar",
+        "confidence": 0.157953
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/026-electrical-panels-st-marys.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__026-electrical-panels-st-marys.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.774147
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.418415
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.383788
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.34532
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.253926
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.201816
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/027-electrical-cabinet-at-sunnyvale-wastewater-plant.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__027-electrical-cabinet-at-sunnyvale-wastewater-plant.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.015091
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/028-broken-switchgear-celn-teplice-img-2611.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__028-broken-switchgear-celn-teplice-img-2611.jpg",
+      "detections": [
+        {
+          "class": "corrosion",
+          "confidence": 0.60634
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.451996
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.247105
+      },
+      "box_on_defensible_defect": false,
+      "review": "The left door looks mechanically damaged. The box calls that region corrosion, which I would not defend. The file stays unlabeled."
+    },
+    {
+      "image": "unlabeled/029-broken-switchgear-celn-teplice-img-2613.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__029-broken-switchgear-celn-teplice-img-2613.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.759336
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.597165
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.502559
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.352749
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.222485
+      },
+      "box_on_defensible_defect": true,
+      "review": "A missing_or_loose_component box sits on a shattered meter. A person could defend that broken meter. The file stays unlabeled; this is not a new label."
+    },
+    {
+      "image": "unlabeled/031-dornbirn-damaged-distribution-board-02asd.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__031-dornbirn-damaged-distribution-board-02asd.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.631322
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.468343
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.408039
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.392193
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.313924
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.273653
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.256115
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "corrosion",
+        "confidence": 0.127862
+      },
+      "box_on_defensible_defect": false,
+      "review": "Boxes sit on intact breakers. The damaged lower section of the board is outside those boxes."
+    },
+    {
+      "image": "unlabeled/033-burned-distribution-board.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__033-burned-distribution-board.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.661729
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.625222
+        },
+        {
+          "class": "weld_crack",
+          "confidence": 0.355964
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "weld_porosity",
+        "confidence": 0.237133
+      },
+      "box_on_defensible_defect": true,
+      "review": "Missing-component boxes cover the charred interior. A person could defend destroyed components there. The weld_crack box is not a crack I would defend. The file stays unlabeled."
+    },
+    {
+      "image": "unlabeled/035-dornbirn-old-main-earthing-busbar-copper-01asd.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__035-dornbirn-old-main-earthing-busbar-copper-01asd.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "corrosion",
+        "confidence": 0.162584
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/036-busbars.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__036-busbars.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.777883
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.706097
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.701641
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.651812
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.515779
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.488456
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.48576
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.451294
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.448448
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.424842
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.399531
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.348908
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.33237
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.314272
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.30563
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.285479
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.1979
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/037-eae-busbar.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__037-eae-busbar.jpg",
+      "detections": [
+        {
+          "class": "dent",
+          "confidence": 0.35838
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.256557
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.127961
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/038-sample-busbar-trunking-system.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__038-sample-busbar-trunking-system.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.905647
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.814119
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.718883
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.230155
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/039-tunnel-busbars-20170118-120211-31613410393.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__039-tunnel-busbars-20170118-120211-31613410393.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.603931
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.533813
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.23652
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/040-baustromverteiler.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__040-baustromverteiler.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.279662
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "corrosion",
+        "confidence": 0.040977
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/041-openclosedpanelboardeeuu-ge-closeuptop.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__041-openclosedpanelboardeeuu-ge-closeuptop.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.63817
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.62461
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.552986
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.457399
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.412607
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.381595
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.21936
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/042-a-distribution-board-in-salacgr-va.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__042-a-distribution-board-in-salacgr-va.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.666952
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.600225
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "dent",
+        "confidence": 0.035806
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/043-outdoor-electrical-enclosure-benthemplein-agniesebuurt-noord-rotterdam-2024-pic1.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__043-outdoor-electrical-enclosure-benthemplein-agniesebuurt-noord-rotterdam-2024-pic1.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.395146
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.38902
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.376581
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "corrosion",
+        "confidence": 0.233304
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/044-utility-cabinet-in-the-stonebow-york-apr26.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__044-utility-cabinet-in-the-stonebow-york-apr26.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.675888
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.290698
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "misaligned_busbar",
+        "confidence": 0.160636
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/045-schaltkasten-alt.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__045-schaltkasten-alt.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.71773
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.548395
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.544966
+        },
+        {
+          "class": "dent",
+          "confidence": 0.400013
+        },
+        {
+          "class": "dent",
+          "confidence": 0.277941
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.215336
+      },
+      "box_on_defensible_defect": false,
+      "review": "Boxes sit on the door edge, vents, and handle of an old cabinet, not on a defect I would mark."
+    },
+    {
+      "image": "unlabeled/046-verne-sch-fermeiers-m-hle-schalttafel.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__046-verne-sch-fermeiers-m-hle-schalttafel.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.717231
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.332751
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.325551
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.256772
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.219908
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/047-2015-05-19-005-schaltkasten-mit-wildem-wein-umwachsen.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__047-2015-05-19-005-schaltkasten-mit-wildem-wein-umwachsen.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.546209
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.480946
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.437108
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.302073
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.251024
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.228446
+      },
+      "box_on_defensible_defect": false,
+      "review": "Scratch boxes sit on the cabinet edge and on vines. Vegetation is not one of the seven defect classes."
+    },
+    {
+      "image": "unlabeled/048-d-lmen-kirchspiel-ehem-sondermunitionslager-visbeck-schaltkasten-2023-6756.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__048-d-lmen-kirchspiel-ehem-sondermunitionslager-visbeck-schaltkasten-2023-6756.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.747628
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.510996
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.458792
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.412109
+        },
+        {
+          "class": "weld_crack",
+          "confidence": 0.405499
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.395698
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.290593
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.279705
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.153842
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/049-cb-truck-showing-surface-discharge-damage.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__049-cb-truck-showing-surface-discharge-damage.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.053189
+      },
+      "box_on_defensible_defect": false,
+      "review": "Tracking is visible on the insulator. No box reached 0.25. Highest box was scratch 0.053. The file stays unlabeled."
+    },
+    {
+      "image": "unlabeled/050-aparamenta-el-ctrica-vapor-aymerich-amat-i-jover-i.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__050-aparamenta-el-ctrica-vapor-aymerich-amat-i-jover-i.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.647351
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.46401
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.411536
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.291061
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.289828
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.197467
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/051-uss-pampanito-bus-bars-agr.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__051-uss-pampanito-bus-bars-agr.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.83327
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.541923
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.509722
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.249671
+      },
+      "box_on_defensible_defect": false,
+      "review": "Scratch and corrosion boxes sit on a seam and a small part. I would not defend either class there."
+    },
+    {
+      "image": "unlabeled/052-old-soviet-distribution-board.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__052-old-soviet-distribution-board.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.508492
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.50479
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.419293
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.185365
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/054-107-switchboard-1902-26522623505.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__054-107-switchboard-1902-26522623505.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.813827
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.696056
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.673467
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.647305
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.595357
+        },
+        {
+          "class": "dent",
+          "confidence": 0.30817
+        },
+        {
+          "class": "dent",
+          "confidence": 0.288731
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "dent",
+        "confidence": 0.246294
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/055-connecting-cables-in-an-electrical-panel-for-the-tunnel-ventilation-fan-06-20-19.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__055-connecting-cables-in-an-electrical-panel-for-the-tunnel-ventilation-fan-06-20-19.jpg",
+      "detections": [
+        {
+          "class": "dent",
+          "confidence": 0.328248
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.299796
+        },
+        {
+          "class": "dent",
+          "confidence": 0.264564
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.251044
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "dent",
+        "confidence": 0.220035
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/056-small-electrical-substation.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__056-small-electrical-substation.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.083433
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/057-motor-control-center-1-mcc-1-facing-north-in-row-of-electrical-cabinets-just-sou.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__057-motor-control-center-1-mcc-1-facing-north-in-row-of-electrical-cabinets-just-sou.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.872463
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.741442
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.610458
+        },
+        {
+          "class": "dent",
+          "confidence": 0.525074
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.490842
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.452774
+        },
+        {
+          "class": "dent",
+          "confidence": 0.417237
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.413073
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.398806
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.372247
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.348031
+        },
+        {
+          "class": "dent",
+          "confidence": 0.340848
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.30748
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.238515
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/058-electrical-switchgear-from-royal-yacht-victoria-and-albert-1899-54797925816.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__058-electrical-switchgear-from-royal-yacht-victoria-and-albert-1899-54797925816.jpg",
+      "detections": [
+        {
+          "class": "corrosion",
+          "confidence": 0.817203
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.533305
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "corrosion",
+        "confidence": 0.228689
+      },
+      "box_on_defensible_defect": false,
+      "review": "Corrosion 0.817 covers a white box on the panel. I would not call that box corrosion."
+    },
+    {
+      "image": "unlabeled/059-6600-volts-room.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__059-6600-volts-room.jpg",
+      "detections": [
+        {
+          "class": "corrosion",
+          "confidence": 0.861443
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.801092
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.794522
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.584945
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.455953
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "corrosion",
+        "confidence": 0.186153
+      },
+      "box_on_defensible_defect": false,
+      "review": "Corrosion boxes cover busbars and insulators that read as installed hardware, not rust."
+    },
+    {
+      "image": "unlabeled/060-switchgear.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__060-switchgear.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.751894
+        },
+        {
+          "class": "misaligned_busbar",
+          "confidence": 0.689821
+        },
+        {
+          "class": "misaligned_busbar",
+          "confidence": 0.497573
+        },
+        {
+          "class": "dent",
+          "confidence": 0.407463
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.406339
+        },
+        {
+          "class": "weld_porosity",
+          "confidence": 0.344993
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.236008
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/062-the-church-of-st-thomas-of-canterbury-electrical-switchgear-geograph-org-uk-5859.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__062-the-church-of-st-thomas-of-canterbury-electrical-switchgear-geograph-org-uk-5859.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.067786
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/063-distribution-board-slovakia-01.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__063-distribution-board-slovakia-01.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.806426
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.291522
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.177131
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/064-dornbirn-karrenseilbahn-electrical-enclosure.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__064-dornbirn-karrenseilbahn-electrical-enclosure.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "dent",
+        "confidence": 0.088556
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/065-rankweil-photovoltaic-power-plant-kindergarten-bredreis-pv-distribution-board-wr.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__065-rankweil-photovoltaic-power-plant-kindergarten-bredreis-pv-distribution-board-wr.jpg",
+      "detections": [
+        {
+          "class": "dent",
+          "confidence": 0.900766
+        },
+        {
+          "class": "dent",
+          "confidence": 0.887436
+        },
+        {
+          "class": "dent",
+          "confidence": 0.765689
+        },
+        {
+          "class": "dent",
+          "confidence": 0.739802
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.48551
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.306555
+        },
+        {
+          "class": "dent",
+          "confidence": 0.303891
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.192254
+      },
+      "box_on_defensible_defect": false,
+      "review": "Dent boxes up to 0.901 cover switches and a display on a board that does not show dents."
+    },
+    {
+      "image": "unlabeled/066-busbar-2p-din-merlingerin-63a.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__066-busbar-2p-din-merlingerin-63a.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.150004
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/067-hybrid-switchgear.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__067-hybrid-switchgear.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "weld_porosity",
+        "confidence": 0.233306
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/068-high-voltage-switchgear-29.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__068-high-voltage-switchgear-29.jpg",
+      "detections": [
+        {
+          "class": "weld_porosity",
+          "confidence": 0.344522
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "misaligned_busbar",
+        "confidence": 0.131898
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/069-main-switchgear-5196532678.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__069-main-switchgear-5196532678.jpg",
+      "detections": [
+        {
+          "class": "corrosion",
+          "confidence": 0.50123
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.428932
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.360313
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "corrosion",
+        "confidence": 0.193152
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/072-electrical-cabinet-by-the-river-geograph-org-uk-7836449.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__072-electrical-cabinet-by-the-river-geograph-org-uk-7836449.jpg",
+      "detections": [],
+      "highest_below_0.25": {
+        "class": "weld_porosity",
+        "confidence": 0.112133
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/flickr-10728995654-lv-switchgear-on-pad.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__flickr-10728995654-lv-switchgear-on-pad.jpg",
+      "detections": [
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.544927
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.31953
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.220616
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/flickr-4355235523-pole-switchgear.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__flickr-4355235523-pole-switchgear.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.658217
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.532778
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.49609
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.474842
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.3772
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.325676
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.237137
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/flickr-48843694488-relay-check-switchgear-cabinet.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__flickr-48843694488-relay-check-switchgear-cabinet.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.862865
+        },
+        {
+          "class": "dent",
+          "confidence": 0.811305
+        },
+        {
+          "class": "dent",
+          "confidence": 0.599653
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.48431
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.470283
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.381388
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.359284
+        },
+        {
+          "class": "corrosion",
+          "confidence": 0.343236
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.324123
+        },
+        {
+          "class": "dent",
+          "confidence": 0.294756
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "scratch",
+        "confidence": 0.239561
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/flickr-51486435378-switchgear-room-breaker-test.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__flickr-51486435378-switchgear-room-breaker-test.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.61538
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.598598
+        },
+        {
+          "class": "missing_or_loose_component",
+          "confidence": 0.581883
+        },
+        {
+          "class": "dent",
+          "confidence": 0.422168
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.316687
+        },
+        {
+          "class": "dent",
+          "confidence": 0.302331
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.275899
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.274701
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "dent",
+        "confidence": 0.228916
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    },
+    {
+      "image": "unlabeled/flickr-6309007001-outdoor-switchgear.jpg",
+      "annotated": "outputs/real_photo_predictions/unlabeled__flickr-6309007001-outdoor-switchgear.jpg",
+      "detections": [
+        {
+          "class": "scratch",
+          "confidence": 0.809674
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.673911
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.615472
+        },
+        {
+          "class": "scratch",
+          "confidence": 0.290489
+        }
+      ],
+      "highest_below_0.25": {
+        "class": "missing_or_loose_component",
+        "confidence": 0.240822
+      },
+      "box_on_defensible_defect": null,
+      "review": "Annotated image was not opened box by box. No defect label was added."
+    }
+  ]
+}

@@ -43,7 +43,7 @@ Validation mAP@0.5 was 0.990. The last epoch of `outputs/training/yolov8_shop/re
 
 ONNX loads. The copied summary records `onnx.checker` passed, an ONNX Runtime session opened, and a dummy forward succeeded. Input name `images`, shape `[1, 3, 640, 640]`, 44,728,911 bytes. That is not a claim that decoded boxes match, and it is not the Wikimedia head shape.
 
-This score is synthetic-domain shop-inspect only. It is not the Wikimedia photo test, not the diagram-set smoke test, and not the reference target of about 0.93.
+This score is synthetic-domain shop-inspect only. It is not the Wikimedia photo test, not the diagram-set smoke test, and not the reference target of about 0.93. The same checkpoint was run on 67 licensed photographs and did not carry this mAP over. That run is recorded in `docs/DOMAIN_GAP.md`. It is not a photo-domain mAP.
 
 ### Wikimedia photo domain
 
