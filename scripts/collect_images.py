@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from inspection.hashing import dhash_image, hamming, sha256_bytes
+from inspection.hashing import dhash_image, hamming, sha256_bytes, sha256_file
 from inspection.quality import NEAR_DUPLICATE_BITS
 
 USER_AGENT = "switchgear-vision-inspection/0.1 (educational prototype; image provenance; contact: local)"
@@ -61,17 +61,35 @@ def _append_row(path: Path, fieldnames: list[str], row: dict) -> None:
         writer.writerow(row)
 
 
-def _existing_hashes(log_path: Path) -> tuple[set[str], list[tuple[str, int]]]:
+def _existing_hashes(log_path: Path, output_root: Path) -> tuple[set[str], list[tuple[str, int]]]:
+    """Load exact hashes from the log and perceptual hashes from stored images.
+
+    The previous implementation only compared perceptual hashes within the
+    current download batch, which allowed a near-duplicate to slip through on a
+    later collection pass. Scanning the small stored public set makes
+    deduplication stable across repeated runs.
+    """
     shas: set[str] = set()
     hashes: list[tuple[str, int]] = []
-    if not log_path.exists():
-        return shas, hashes
-    with log_path.open(newline="", encoding="utf-8") as handle:
-        for row in csv.DictReader(handle):
-            if row.get("status") != "ok":
+
+    if log_path.exists():
+        with log_path.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                if row.get("status") != "ok":
+                    continue
+                if row.get("sha256"):
+                    shas.add(row["sha256"])
+
+    if output_root.exists():
+        for path in sorted(item for item in output_root.rglob("*") if item.is_file()):
+            if path.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tif", ".tiff"}:
                 continue
-            if row.get("sha256"):
-                shas.add(row["sha256"])
+            image = cv2.imread(str(path), cv2.IMREAD_COLOR)
+            if image is None:
+                continue
+            shas.add(sha256_file(path))
+            hashes.append((str(path.relative_to(ROOT)), dhash_image(image)))
+
     return shas, hashes
 
 
@@ -109,8 +127,8 @@ def main() -> int:
         failed_path = ROOT / failed_path
 
     rows = _read_manifest(manifest_path)
-    known_sha, _known_hash = _existing_hashes(log_path)
-    batch_hashes: list[tuple[str, int]] = []
+    known_sha, known_hashes = _existing_hashes(log_path, output_root)
+    perceptual_hashes: list[tuple[str, int]] = list(known_hashes)
     log_fields = [
         "filename",
         "source_url",
@@ -179,7 +197,7 @@ def main() -> int:
             _append_row(log_path, log_fields, record)
             print(f"DUP sha {url}")
             continue
-        near = next((name for name, other in batch_hashes if hamming(perceptual, other) <= args.near_bits), None)
+        near = next((name for name, other in perceptual_hashes if hamming(perceptual, other) <= args.near_bits), None)
         if near:
             record["status"] = "duplicate_perceptual"
             record["filename"] = near
@@ -196,7 +214,7 @@ def main() -> int:
         record["filename"] = str(destination.relative_to(ROOT))
         record["status"] = "ok"
         known_sha.add(digest)
-        batch_hashes.append((record["filename"], perceptual))
+        perceptual_hashes.append((record["filename"], perceptual))
         _append_row(log_path, log_fields, record)
         ok += 1
         print(f"OK {record['filename']} {width}x{height}")
