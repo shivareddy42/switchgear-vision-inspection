@@ -78,14 +78,17 @@ Per-class image counts (an image can count toward more than one class):
 
 Split counts: train 490, val 105, test 105.
 
-## Reproduce
+## Reproducibility note
 
-```bash
-python3 generate.py --output /path/to/synthetic-enclosures
-```
+The committed images, labels, split assignment, and manifest are sufficient to
+re-run training and evaluation on this exact dataset. The original
+`shop-inspect-1.0.0` render generator is **not currently included in this
+public repository**, so the pixels themselves cannot yet be regenerated from
+seed alone.
 
-Requires Python 3, numpy, opencv-python-headless, and Pillow. No network
-access and no downloaded photographs.
+A separate, simpler procedural generator is included at
+`scripts/synthesize_enclosures.py`; it produces `data/synthetic/` and is not
+the source of this shop-inspect benchmark.
 
 ## Parameters (shop-inspect-1.0.0)
 
