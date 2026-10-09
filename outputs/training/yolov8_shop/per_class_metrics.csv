@@ -1,0 +1,8 @@
+domain,split,class_id,class_name,precision,recall,f1,ap50,ap50_95,instances,images
+synthetic-domain,test,0,scratch,0.984500,1.000000,0.992190,0.995000,0.987462,31,31
+synthetic-domain,test,1,dent,0.963266,1.000000,0.981289,0.995000,0.951238,32,32
+synthetic-domain,test,2,weld_porosity,0.991333,1.000000,0.995648,0.995000,0.824094,26,26
+synthetic-domain,test,3,weld_crack,0.967351,0.987895,0.977516,0.994032,0.702009,30,30
+synthetic-domain,test,4,corrosion,0.989990,1.000000,0.994970,0.995000,0.934195,30,30
+synthetic-domain,test,5,misaligned_busbar,0.990922,1.000000,0.995440,0.995000,0.912672,33,33
+synthetic-domain,test,6,missing_or_loose_component,1.000000,0.890218,0.941921,0.983636,0.835044,34,34

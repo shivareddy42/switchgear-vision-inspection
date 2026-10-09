@@ -58,7 +58,7 @@ def main() -> int:
     parser.add_argument("--dir", default=None)
     parser.add_argument("--video", default=None)
     parser.add_argument("--webcam", action="store_true")
-    parser.add_argument("--weights", default="outputs/training/yolov8/weights/best.pt")
+    parser.add_argument("--weights", default="outputs/training/yolov8_shop/weights/best.pt")
     parser.add_argument("--demo", action="store_true")
     parser.add_argument("--mock", action="store_true")
     parser.add_argument("--device", default="cpu")

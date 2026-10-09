@@ -16,7 +16,38 @@ These numbers come from the project description. This repository did not reprodu
 
 ## Metrics reproduced by this repository
 
-These numbers are the Wikimedia photo domain only. They are not the shop-inspect set, not the diagram set, and not the reference targets above.
+These measurements were copied into this repository. They are not the reference targets above. Each domain is scored on its own split. The shop-inspect images are procedural renders, and a high score on them does not transfer to plant photos.
+
+### Synthetic-domain shop-inspect (`data/shop`)
+
+Held-out synthetic test of the shop-inspect renders only. Generator `shop-inspect-1.0.0`. 105 test images. Model `yolov8s`, 40 epochs, image size 640, seed 42, trained on MPS, evaluated on CPU. This run was not trained again here. The checkpoint is `outputs/training/yolov8_shop/weights/best.pt`. The ONNX file is `outputs/training/yolov8_shop/best.onnx`. The copied measurement is `outputs/training/yolov8_shop/evaluation_summary.json`. A labeled preview is `outputs/shop_test_preview.jpg`.
+
+The json values below are the measurement. Rounded to four decimals they are precision 0.9839, recall 0.9826, F1 0.9832, mAP@0.5 0.9932, mAP@0.5:0.95 0.8781.
+
+| Metric | Value |
+| --- | --- |
+| precision | 0.983909 |
+| recall | 0.982588 |
+| F1 | 0.983248 |
+| mAP@0.5 | 0.993238 |
+| mAP@0.5:0.95 | 0.878102 |
+| test images | 105 |
+
+Precision and recall in that table are the means of per-class precision and recall at each class's max-F1 confidence on the synthetic test split. F1 is the harmonic mean of those two fields. mAP@0.5 is mean average precision at IoU 0.50. mAP@0.5:0.95 is mean average precision over IoU 0.50:0.95.
+
+At confidence 0.50 and IoU 0.50, the `scope=all` row of `outputs/training/yolov8_shop/threshold_analysis.csv` is 212 true positives, 2 false positives, and 4 false negatives. That row also records NMS IoU 0.70 and a confidence floor of 0.10 before the threshold is applied. It is a different operating point from the max-F1 means in the table above.
+
+Per-class average precision on the same test split is in `evaluation_summary.json` and `per_class_metrics.csv` (`ap50`): scratch 0.995, dent 0.995, weld_porosity 0.995, weld_crack 0.994032, corrosion 0.995, misaligned_busbar 0.995, missing_or_loose_component 0.983636.
+
+Validation mAP@0.5 was 0.990. The last epoch of `outputs/training/yolov8_shop/results.csv` (epoch 40, 105 validation images) records `metrics/mAP50(B)` 0.99071, which rounds to 0.990. That row is validation, not the held-out test.
+
+ONNX loads. The copied summary records `onnx.checker` passed, an ONNX Runtime session opened, and a dummy forward succeeded. Input name `images`, shape `[1, 3, 640, 640]`, 44,728,911 bytes. That is not a claim that decoded boxes match, and it is not the Wikimedia head shape.
+
+This score is synthetic-domain shop-inspect only. It is not the Wikimedia photo test, not the diagram-set smoke test, and not the reference target of about 0.93.
+
+### Wikimedia photo domain
+
+These numbers are the Wikimedia photo domain only. They are not the shop-inspect set and not the diagram set.
 
 Measured on 2026-10-08. No GPU was available. The checkpoint is `outputs/training/yolov8/weights/best.pt`, started from `yolov8n.pt`. Training was 5 epochs, image size 320, batch 4, AdamW, learning rate 0.001, seed 42, CPU, workers 0. Early-stopping patience was 5 and did not fire. The run is in `outputs/training/yolov8/results.csv`.
 
@@ -43,7 +74,7 @@ ONNX export of the same checkpoint passed `onnx.checker`. ONNX Runtime loaded th
 
 The model in this section is not a plant inspection model. It was trained on 16 public photos. On that photo set, weld porosity, misaligned busbar, and missing or loose component still have no labels, and the photos that do are not switchgear enclosures.
 
-## Diagram-set smoke test (`data/synthetic`)
+### Diagram-set smoke test (`data/synthetic`)
 
 This is the earlier procedural set, not the shop-inspect training target. `data/synthetic/` holds 700 diagram renders, 100 per class, split 490/105/105 before training augmentation. That count is not the resume target of about 6,800 factory images. The Wikimedia checkpoint above was not retrained on these renders.
 
@@ -51,8 +82,3 @@ Any number from `outputs/training/yolov8_synthetic/` is a CPU smoke test on thos
 
 One epoch, image size 320, batch 8, AdamW, learning rate 0.001, seed 42, CPU, workers 0, horizontal flip off. The single row of `outputs/training/yolov8_synthetic/results.csv` is the validation split of these diagrams (105 images): precision 0.00197, recall 0.50476, mAP@0.5 0.2585, mAP@0.5:0.95 0.16596. The Wikimedia test mAP@0.5 of 0.12375 was not replaced.
 
-## Shop-inspect training slot (`data/shop`)
-
-`data/shop/` is the current synthetic training set: 700 shop-inspect renders, split 490/105/105. `configs/data.yaml` points at it. This slot is empty.
-
-Checked on 2026-10-09: `/cursor/stores/self/training-cloud/best.pt` and `/cursor/stores/self/training-cloud/evaluation_summary.json` were not present. Nothing was copied into `outputs/training/yolov8_shop/`. No precision, recall, or mAP is recorded for this domain. Do not copy the Wikimedia 0.12375 or the diagram-set 0.2585 into this slot. Do not treat either number as plant performance or as the reference target of about 0.93.

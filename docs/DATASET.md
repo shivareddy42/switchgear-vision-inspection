@@ -125,4 +125,4 @@ Copied from the shop-inspect generator output (`shop-inspect-1.0.0`). These are 
 
 700 unique images, seeds 0 through 699. Split of those originals, seed 42, before any training augmentation: train 490, validation 105, test 105. An image can carry more than one class. Images that contain each class: scratch 196, dent 197, weld porosity 193, weld crack 194, corrosion 195, misaligned busbar 195, missing or loose component 197.
 
-`configs/data.yaml` points at this folder for the next train. No shop-domain metric is stored in this repository. The cloud training directory did not yet contain `best.pt` or `evaluation_summary.json`. That empty slot is in `docs/MODEL_CARD.md`. Do not fill it from the Wikimedia test or from the diagram-set smoke. This 700 is not the resume target of about 6,800 factory images.
+`configs/data.yaml` points at this folder. The held-out synthetic-domain test is recorded in `docs/MODEL_CARD.md` and `outputs/training/yolov8_shop/`. It is not the Wikimedia test and not the diagram-set smoke. The renders are procedural, and that score does not transfer to plant photos. This 700 is not the resume target of about 6,800 factory images.
