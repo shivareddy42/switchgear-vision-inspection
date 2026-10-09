@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import argparse
 import os
-import shutil
 import sys
 from pathlib import Path
 
@@ -43,6 +42,8 @@ def main() -> int:
     parser.add_argument("--data", default="configs/data.yaml")
     parser.add_argument("--run-name", default="yolov8")
     args = parser.parse_args()
+    if not args.run_name or Path(args.run_name).name != args.run_name or args.run_name in {".", ".."}:
+        parser.error("--run-name must be a single directory name")
     os.chdir(ROOT)
     config_path = ROOT / args.config
     config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
@@ -64,6 +65,10 @@ def main() -> int:
             "Split labeled originals first. No metric will be invented."
         )
         return 1
+    run_dir = ROOT / "outputs" / "training" / args.run_name
+    if run_dir.exists():
+        print(f"Run directory already exists: {run_dir}. Choose a new --run-name to preserve its artifacts.")
+        return 1
     if diagram or shop:
         which = "shop-inspect" if shop else "diagram"
         print(
@@ -82,9 +87,6 @@ def main() -> int:
     print(f"torch {torch.__version__} cuda {torch.cuda.is_available()} device {device}")
     print(f"train_images {train_images} val_images {val_images} model {config['model']} data {args.data}")
     model = YOLO(config["model"])
-    run_dir = ROOT / "outputs" / "training" / args.run_name
-    if run_dir.exists():
-        shutil.rmtree(run_dir)
     model.train(
         data=str(data_path),
         epochs=int(config["epochs"]),

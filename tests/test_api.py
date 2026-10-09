@@ -4,6 +4,7 @@ import io
 
 import cv2
 import numpy as np
+import pytest
 from fastapi.testclient import TestClient
 
 import app as app_module
@@ -28,6 +29,13 @@ class _FakeInspector:
             "annotated": image,
             "decision": {"result": "FAIL"},
         }
+
+
+@pytest.fixture(autouse=True)
+def reset_inspector():
+    app_module.set_inspector(None)
+    yield
+    app_module.set_inspector(None)
 
 
 def _jpeg_bytes() -> bytes:
@@ -58,3 +66,23 @@ def test_predict_schema_uses_mocked_model():
     assert body["detections"][0]["class"] == "weld_porosity"
     assert body["detections"][0]["confidence"] == 0.87
     assert body["detections"][0]["bbox"] == [10.0, 12.0, 40.0, 50.0]
+
+
+def test_missing_weights_do_not_silently_enable_mock(monkeypatch, tmp_path):
+    monkeypatch.setenv("MODEL_WEIGHTS", str(tmp_path / "missing.pt"))
+    monkeypatch.delenv("MODEL_MOCK", raising=False)
+    response = TestClient(app_module.app).post("/predict", files={"file": ("panel.jpg", _jpeg_bytes(), "image/jpeg")})
+    assert response.status_code == 503
+
+
+def test_mock_requires_explicit_configuration(monkeypatch, tmp_path):
+    monkeypatch.setenv("MODEL_WEIGHTS", str(tmp_path / "missing.pt"))
+    monkeypatch.setenv("MODEL_MOCK", "1")
+    response = TestClient(app_module.app).post("/predict", files={"file": ("panel.jpg", _jpeg_bytes(), "image/jpeg")})
+    assert response.status_code == 200
+    assert response.json()["mock"] is True
+
+
+def test_invalid_upload_is_rejected():
+    response = TestClient(app_module.app).post("/predict", files={"file": ("bad.jpg", b"invalid", "image/jpeg")})
+    assert response.status_code == 400

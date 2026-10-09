@@ -27,6 +27,6 @@ Held-out test, from `evaluation_summary.json` (the same measurement rounded to f
 
 Precision and recall there are means of per-class precision and recall at each class's max-F1 confidence. At confidence 0.50 and IoU 0.50, the `scope=all` row of `threshold_analysis.csv` is 2 false positives and 4 false negatives (212 true positives). That row also records NMS IoU 0.70. Per-class average precision is the `ap50` column in the json and in `per_class_metrics.csv`.
 
-Validation mAP@0.5 was 0.990. Epoch 40 of `results.csv` records `metrics/mAP50(B)` 0.99071 on the 105 validation images. That row is validation, not the held-out test.
+Validation mAP@0.5 was 0.99071 (0.991 rounded to three decimals). Epoch 40 of `results.csv` records `metrics/mAP50(B)` 0.99071 on the 105 validation images. That row is validation, not the held-out test.
 
 ONNX loads. The summary records a passed checker, an ONNX Runtime session, and a successful dummy forward. Input shape `[1, 3, 640, 640]`. This run was not trained again in this repository.
