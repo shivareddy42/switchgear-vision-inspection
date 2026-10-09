@@ -16,7 +16,6 @@ from inspection.labels import yolo_to_xyxy
 MOCK_MODEL_VERSION = "mock-demo"
 MOCK_NOTE = "MOCK detection. This is not model inference."
 
-
 def draw_detections(image: np.ndarray, detections: list[Detection], mock: bool) -> np.ndarray:
     canvas = image.copy()
     for detection in detections:
@@ -25,7 +24,16 @@ def draw_detections(image: np.ndarray, detections: list[Detection], mock: bool) 
         cv2.rectangle(canvas, (x1, y1), (x2, y2), color, 2)
         prefix = "MOCK " if mock else ""
         text = f"{prefix}{detection.class_name} {detection.confidence:.2f}"
-        cv2.putText(canvas, text, (x1, max(20, y1 - 8)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2, cv2.LINE_AA)
+        cv2.putText(
+            canvas,
+            text,
+            (x1, max(20, y1 - 8)),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,
+            color,
+            2,
+            cv2.LINE_AA,
+        )
     if mock:
         cv2.rectangle(canvas, (0, 0), (canvas.shape[1], 36), (0, 0, 180), -1)
         cv2.putText(
@@ -54,10 +62,13 @@ class Inspector:
     def _load(self) -> None:
         if self.weights is None or not Path(self.weights).exists():
             raise FileNotFoundError(f"weights not found: {self.weights}")
+
         from ultralytics import YOLO
 
-        self.model = YOLO(str(self.weights))
-        self.model_version = Path(self.weights).stem
+        weights = Path(self.weights)
+        self.model = YOLO(str(weights))
+        run_name = weights.parent.parent.name if weights.parent.name == "weights" else ""
+        self.model_version = f"{run_name}:{weights.stem}" if run_name else weights.stem
 
     def predict(self, image: np.ndarray, default: float, per_class: dict[str, float]) -> dict:
         started = time.perf_counter()
@@ -66,12 +77,15 @@ class Inspector:
             mock = True
             model_version = MOCK_MODEL_VERSION
         else:
-            detections = self._yolo(image)
+            operating_floor = min([float(default), *[float(v) for v in per_class.values()]])
+            detections = self._yolo(image, conf=max(0.001, operating_floor))
             mock = False
             model_version = self.model_version
+
         elapsed_ms = (time.perf_counter() - started) * 1000.0
         decision = decide(detections, default=default, per_class=per_class)
         annotated = draw_detections(image, detections, mock=mock)
+
         return {
             "result": decision["result"],
             "model_version": model_version,
@@ -84,8 +98,16 @@ class Inspector:
             "decision": decision,
         }
 
-    def _yolo(self, image: np.ndarray) -> list[Detection]:
-        results = self.model.predict(source=image, device=self.device, verbose=False)
+    def _yolo(self, image: np.ndarray, conf: float) -> list[Detection]:
+        # Ask YOLO for every candidate that could possibly cross an operating
+        # threshold. This avoids Ultralytics' default conf=0.25 becoming a hidden
+        # policy while also avoiding thousands of near-zero boxes in output.
+        results = self.model.predict(
+            source=image,
+            device=self.device,
+            conf=float(conf),
+            verbose=False,
+        )
         detections: list[Detection] = []
         for result in results:
             if result.boxes is None:
@@ -98,7 +120,12 @@ class Inspector:
                     Detection(
                         class_name=name,
                         confidence=float(box.conf.item()),
-                        bbox=(float(xyxy[0]), float(xyxy[1]), float(xyxy[2]), float(xyxy[3])),
+                        bbox=(
+                            float(xyxy[0]),
+                            float(xyxy[1]),
+                            float(xyxy[2]),
+                            float(xyxy[3]),
+                        ),
                     )
                 )
         return detections
@@ -109,7 +136,13 @@ def _mock_detections(image: np.ndarray) -> list[Detection]:
     height, width = image.shape[:2]
     cx, cy, bw, bh = 0.50, 0.50, 0.30, 0.20
     x1, y1, x2, y2 = yolo_to_xyxy(cx, cy, bw, bh, width, height)
-    return [Detection(class_name="corrosion", confidence=0.90, bbox=(x1, y1, x2, y2))]
+    return [
+        Detection(
+            class_name="corrosion",
+            confidence=0.90,
+            bbox=(x1, y1, x2, y2),
+        )
+    ]
 
 
 def save_prediction(output_dir: Path, stem: str, payload: dict) -> tuple[Path, Path]:
@@ -119,6 +152,10 @@ def save_prediction(output_dir: Path, stem: str, payload: dict) -> tuple[Path, P
     image_path = output_dir / f"{stem}.jpg"
     json_path = output_dir / f"{stem}.json"
     write_bgr(image_path, payload["annotated"])
-    public = {key: value for key, value in payload.items() if key not in {"annotated", "decision"}}
+    public = {
+        key: value
+        for key, value in payload.items()
+        if key not in {"annotated", "decision"}
+    }
     json_path.write_text(json.dumps(public, indent=2) + "\n", encoding="utf-8")
     return image_path, json_path
