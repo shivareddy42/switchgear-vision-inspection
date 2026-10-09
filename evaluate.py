@@ -73,6 +73,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Evaluate a YOLOv8 checkpoint.")
     parser.add_argument("--weights", default="outputs/training/yolov8/weights/best.pt")
     parser.add_argument("--device", default="cpu")
+    parser.add_argument(
+        "--data",
+        default="configs/data_wikimedia.yaml",
+        help="Dataset yaml. The default is the Wikimedia photo split, not data/shop.",
+    )
     args = parser.parse_args()
     os.chdir(ROOT)
     weights = ROOT / args.weights
@@ -98,7 +103,7 @@ def main() -> int:
     (ROOT / "outputs" / "val_predictions.json").write_text(json.dumps(val_records, indent=2) + "\n", encoding="utf-8")
     (ROOT / "outputs" / "test_predictions.json").write_text(json.dumps(test_records, indent=2) + "\n", encoding="utf-8")
     metrics = model.val(
-        data=str(ROOT / "configs" / "data.yaml"),
+        data=str(ROOT / args.data),
         split="test",
         device=args.device,
         iou=iou,

@@ -4,9 +4,12 @@ An end-to-end computer-vision prototype for detecting manufacturing defects on s
 
 The resume numbers (about 6,800 training images, mAP@0.5 around 0.93, rare-defect recall 71% to 89%, false reject under 2.4%, 42 ms/frame on a Jetson, 63% fewer inspection hours, 5-month payback) are reference targets. They are listed again in `docs/MODEL_CARD.md`. Nothing in this repository measured them.
 
-What this repo did measure is a 27-image public set, 22 labeled photos (scratch 1, dent 2, weld crack 2, corrosion 17), a 16/3/3 split, a 5-epoch CPU run of YOLOv8n, and a test mAP@0.5 of 0.12375 on 3 images. That is a method demo, not a plant model.
+Four layers sit next to each other. They are not one dataset and they are not one metric.
 
-`data/synthetic/` is a separate procedural set: 100 drawn enclosures per class, 700 unique images, split 490/105/105 with seed 42. Those renders are not factory photographs, they are not mixed into the Wikimedia split, and they are not the 6,800-image reference target. A 1-epoch CPU smoke on that validation split recorded precision 0.00197, recall 0.50476, mAP@0.5 0.2585, and mAP@0.5:0.95 0.16596 (`outputs/training/yolov8_synthetic/results.csv`). That is synthetic-domain only. It is not a reproduced 0.93 mAP.
+1. Wikimedia photos in `data/raw` and the 16/3/3 labeled split. Real photographs, a small set: 27 files, 22 hand-labeled, 5 unlabeled. Most classes have one or two photos or none. The only photo-domain test measurement is mAP@0.5 0.12375 on 3 images.
+2. Diagram renders in `data/synthetic/`. An earlier procedural set, 100 images per class, split 490/105/105. It is not the training target. Its 1-epoch smoke (precision 0.00197, recall 0.50476, mAP@0.5 0.2585, mAP@0.5:0.95 0.16596) stays in `outputs/training/yolov8_synthetic/` and is not a shop or plant result.
+3. Shop-inspect renders in `data/shop/`. The current synthetic training set: 700 images, split 490/105/105, generator `shop-inspect-1.0.0`. `configs/data.yaml` points here. No shop metric is recorded yet.
+4. Resume reference targets (about 6,800 factory images, mAP@0.5 around 0.93, and the rest of that list). Still unmeasured.
 
 ## 1. Problem
 
@@ -46,7 +49,7 @@ Every candidate is a row in `data/sources.csv`, with the URL that was actually o
 | 5 | misaligned_busbar | 1 busbar photo, unlabeled |
 | 6 | missing_or_loose_component | 1 panel photo, unlabeled |
 
-`docs/DATA_STRATEGY.md` says what each class looks like and why the empty photo classes stayed empty. The table above is the Wikimedia set only. The procedural set in `data/synthetic/` has 100 images in every class, including the three classes with no public photo. Those 700 renders are not additional factory images.
+`docs/DATA_STRATEGY.md` says what each class looks like and why the empty photo classes stayed empty. The table above is the Wikimedia set only. `data/synthetic/` is the earlier diagram set. `data/shop/` is the shop-inspect training set. Neither count is additional factory images.
 
 ## 6. Cleaning and deduplication
 
@@ -68,7 +71,7 @@ The policy is factory lighting, focus, vibration, sensor noise, a slightly skewe
 
 Training saw 80 presentations (5 epochs × 16 images) under `configs/train.yaml`. The preview command draws the Albumentations version of that policy, which is what was checked visually. On `Metal_Dented_Defect.jpg` both boxes stayed at `(0.24, 0.45, 0.32, 0.34)` and `(0.74, 0.42, 0.32, 0.40)` under brightness, blur, and noise. Rotation and perspective moved them. The combined panel, which flips, moved the centers to about `0.82` and `0.27`.
 
-Augmentation does not replace real rare-defect examples. On the Wikimedia photos, weld porosity, busbar misalignment, and missing hardware still have no labels. The procedural renders in `data/synthetic/` draw those classes, and they stay in their own split. Oversampling and class weights are not a substitute. Plant images are required before deployment.
+Augmentation does not replace real rare-defect examples. On the Wikimedia photos, weld porosity, busbar misalignment, and missing hardware still have no labels. Diagram renders and shop-inspect renders draw those classes in their own folders. Oversampling and class weights are not a substitute. Plant images are required before deployment.
 
 ## 10. Why YOLOv8
 
@@ -76,7 +79,9 @@ The station needs the defect type and the location. A classifier cannot show the
 
 ## 11. Training
 
-`python train.py --config configs/train.yaml` loads `yolov8n.pt` (transfer learning). yolov8s is the better start when a GPU exists. This machine has no CUDA, so the config pins CPU, image size 320, batch 4, 5 epochs, AdamW, learning rate 0.001, seed 42, patience 5. The config is copied next to the weights. On the validation split, mAP@0.5 in `results.csv` stayed at 0.15393 for the first three epochs, rose to 0.27528 at epoch 4, and stayed there at epoch 5.
+The photo run was `python train.py --config configs/train.yaml --data configs/data_wikimedia.yaml --run-name yolov8`. It loads `yolov8n.pt` (transfer learning). yolov8s is the better start when a GPU exists. This machine has no CUDA, so the config pins CPU, image size 320, batch 4, 5 epochs, AdamW, learning rate 0.001, seed 42, patience 5. On the Wikimedia validation split, mAP@0.5 in `outputs/training/yolov8/results.csv` stayed at 0.15393 for the first three epochs, rose to 0.27528 at epoch 4, and stayed there at epoch 5.
+
+`configs/data.yaml` now points at `data/shop` for the next train. That run has not been started here. A cloud agent is training separately. When it is scored, the numbers belong in `outputs/training/yolov8_shop/` and stay labeled shop-inspect synthetic, not Wikimedia and not 0.93.
 
 ## 12. Evaluation
 
@@ -121,7 +126,8 @@ SQLAlchemy models in `db/models.py`. Default URL is SQLite at `outputs/inspectio
 ## 18. Limitations
 
 - On the Wikimedia photos, weld porosity, misaligned busbar, and missing hardware still have no image. Scratch, dent, and weld crack have one or two photos, and they are not enclosures.
-- `data/synthetic/` draws 100 enclosures per class (700 unique, split 490/105/105). That count is procedural. It is not the resume target of about 6,800 factory images, and a metric on it is not 0.93 mAP.
+- `data/synthetic/` is the earlier diagram set (700 images, 100 per class). It is not the training target, and its smoke mAP is not a shop or plant result.
+- `data/shop/` is the shop-inspect training set (700 images, split 490/105/105). No shop metric is in this repository yet. That count is not about 6,800 factory images.
 - The corrosion photos are pipe, bolts, beams, coupons, a plate, a tailgate, nails, a pump, pewter, and a valve. They are not switchgear enclosures.
 - Test and validation are 3 images each. Test mAP@0.5 0.12375 and validation mAP@0.5 0.27528 are not comparable to 0.93.
 - False reject is not estimable.
@@ -159,10 +165,13 @@ python scripts/preview_augmentations.py \
     --labels data/train/labels/Metal_Dented_Defect.txt \
     --output outputs/augmentation_preview.jpg
 
-python train.py --config configs/train.yaml
-python evaluate.py --weights outputs/training/yolov8/weights/best.pt --device cpu
+python train.py --config configs/train.yaml --data configs/data_wikimedia.yaml --run-name yolov8
+python evaluate.py --weights outputs/training/yolov8/weights/best.pt --data configs/data_wikimedia.yaml --device cpu
 
-# Optional synthetic-domain smoke. Does not replace the Wikimedia checkpoint.
+# Next train uses the shop-inspect set. Not started in this change.
+# python train.py --config configs/train.yaml --data configs/data.yaml --run-name yolov8_shop
+
+# Diagram-set smoke. Does not replace the Wikimedia checkpoint or the shop set.
 python train.py --config configs/train_synthetic.yaml --data configs/data_synthetic.yaml --run-name yolov8_synthetic
 python scripts/analyze_thresholds.py
 

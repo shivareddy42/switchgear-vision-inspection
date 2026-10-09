@@ -80,11 +80,24 @@ The preview grid is Albumentations, not the Ultralytics loader. It uses `data/tr
 
 Augmentation does not create weld porosity, a misaligned busbar, or a missing fastener. Those classes are still empty in the Wikimedia split. The procedural set below draws them. Factory images are required before any deployment claim.
 
+## Four layers
+
+These are separate. A count or a metric from one is not a count or a metric from another.
+
+| Layer | Where | What it is |
+| --- | --- | --- |
+| Wikimedia photos | `data/raw`, `data/train`, `data/val`, `data/test` | Real photographs. 27 files, 22 hand-labeled, 5 unlabeled. Most classes are thin or empty. |
+| Diagram renders | `data/synthetic/` | Earlier procedural set. Not the training target. |
+| Shop-inspect renders | `data/shop/` | Current synthetic training set. 700 images, split 490/105/105. |
+| Resume reference targets | `docs/MODEL_CARD.md` | About 6,800 factory images and mAP@0.5 around 0.93. Still unmeasured. |
+
 ## Counts a script will print
 
-`python scripts/dataset_stats.py` prints the 27 cleaned images, the per-class box counts, and the 16/3/3 split. It does not multiply by an augmentation factor. It does not count `data/synthetic/`.
+`python scripts/dataset_stats.py` prints the 27 cleaned Wikimedia images, the per-class box counts, and the 16/3/3 split. It does not multiply by an augmentation factor. It does not count `data/synthetic/` or `data/shop/`.
 
-## Procedural enclosures
+## Diagram renders (`data/synthetic`)
+
+This is the earlier procedural set, not the shop-inspect training target.
 
 `scripts/synthesize_enclosures.py` draws switchgear-style cabinets with numpy, OpenCV, and Pillow. Each image is one class. The YOLO box is the bounding rectangle of the defect mask drawn in that image. Copyrighted catalogs were not copied.
 
@@ -105,3 +118,11 @@ The split is 490 / 105 / 105. It was applied to these originals before any train
 These 700 renders are not the resume target of about 6,800 factory images. A metric computed on them is not a reproduced 0.93 mAP and is not plant performance.
 
 The labeled grid is `outputs/synthetic_enclosure_preview.jpg`.
+
+## Shop-inspect renders (`data/shop`)
+
+Copied from the shop-inspect generator output (`shop-inspect-1.0.0`). These are procedural cabinet views, not photographs and not the diagram set above. Copyrighted catalogs were not copied. Every row in `data/shop/manifest.csv` has `synthetic=true`.
+
+700 unique images, seeds 0 through 699. Split of those originals, seed 42, before any training augmentation: train 490, validation 105, test 105. An image can carry more than one class. Images that contain each class: scratch 196, dent 197, weld porosity 193, weld crack 194, corrosion 195, misaligned busbar 195, missing or loose component 197.
+
+`configs/data.yaml` points at this folder for the next train. No shop-domain metric is stored in this repository. The cloud training directory did not yet contain `best.pt` or `evaluation_summary.json`. That empty slot is in `docs/MODEL_CARD.md`. Do not fill it from the Wikimedia test or from the diagram-set smoke. This 700 is not the resume target of about 6,800 factory images.

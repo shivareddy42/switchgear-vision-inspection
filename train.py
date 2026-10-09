@@ -48,11 +48,14 @@ def main() -> int:
     config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
     data_path = ROOT / args.data
     train_images, val_images, dataset_path = _split_counts(data_path)
-    synthetic = "synthetic" in dataset_path
-    if synthetic and args.run_name == "yolov8":
+    normalized = dataset_path.replace("\\", "/").rstrip("/")
+    diagram = normalized.endswith("data/synthetic")
+    shop = normalized.endswith("data/shop")
+    if (diagram or shop) and args.run_name == "yolov8":
+        suggested = "yolov8_shop" if shop else "yolov8_synthetic"
         print(
-            "Refusing to write a synthetic-domain run over outputs/training/yolov8. "
-            "Pass --run-name yolov8_synthetic."
+            "Refusing to write a drawn-image run over outputs/training/yolov8, "
+            f"which holds the Wikimedia checkpoint. Pass --run-name {suggested}."
         )
         return 1
     if train_images == 0 or val_images == 0:
@@ -61,11 +64,13 @@ def main() -> int:
             "Split labeled originals first. No metric will be invented."
         )
         return 1
-    if synthetic:
+    if diagram or shop:
+        which = "shop-inspect" if shop else "diagram"
         print(
-            "Synthetic-domain training only. These images are procedural renders, "
+            f"{which} domain only. These images are procedural renders, "
             "not factory photographs, and any metric from this run is not plant "
-            "performance and is not the 0.93 reference target."
+            "performance and is not the 0.93 reference target. "
+            "Do not mix this result with the Wikimedia metric."
         )
     import torch
     from ultralytics import YOLO

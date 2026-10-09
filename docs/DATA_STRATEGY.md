@@ -82,4 +82,4 @@ No image in this repository is labeled missing_or_loose_component.
 
 Public data still does not support all seven classes. Weld porosity, misaligned busbar, and missing or loose component stayed empty after the second Commons search. Forcing a seated busbar, a present bolt, or a sheet of holes into those classes would make the metrics look broader than the evidence.
 
-`data/synthetic/` is a later procedural set that draws all seven classes on metal cabinets. It is not mixed into the photo split. Its 700 images are not factory photographs and are not the 6,800-image reference target.
+`data/synthetic/` is an earlier diagram set that draws all seven classes. `data/shop/` is the later shop-inspect training set, also procedural. Neither is mixed into the photo split. Neither 700 is factory photographs or the 6,800-image reference target.

@@ -16,6 +16,8 @@ These numbers come from the project description. This repository did not reprodu
 
 ## Metrics reproduced by this repository
 
+These numbers are the Wikimedia photo domain only. They are not the shop-inspect set, not the diagram set, and not the reference targets above.
+
 Measured on 2026-10-08. No GPU was available. The checkpoint is `outputs/training/yolov8/weights/best.pt`, started from `yolov8n.pt`. Training was 5 epochs, image size 320, batch 4, AdamW, learning rate 0.001, seed 42, CPU, workers 0. Early-stopping patience was 5 and did not fire. The run is in `outputs/training/yolov8/results.csv`.
 
 Held-out test, 3 images (badly rusted pipes, the VIGV weld crack, and `Corroded_Bolt.jpg`), NMS IoU 0.5, from `python evaluate.py`:
@@ -41,10 +43,16 @@ ONNX export of the same checkpoint passed `onnx.checker`. ONNX Runtime loaded th
 
 The model in this section is not a plant inspection model. It was trained on 16 public photos. On that photo set, weld porosity, misaligned busbar, and missing or loose component still have no labels, and the photos that do are not switchgear enclosures.
 
-## Synthetic-domain smoke test
+## Diagram-set smoke test (`data/synthetic`)
 
-`data/synthetic/` holds 700 procedural enclosure renders, 100 per class, split 490/105/105 before training augmentation. That count is not the resume target of about 6,800 factory images. The Wikimedia checkpoint above was not retrained on these renders.
+This is the earlier procedural set, not the shop-inspect training target. `data/synthetic/` holds 700 diagram renders, 100 per class, split 490/105/105 before training augmentation. That count is not the resume target of about 6,800 factory images. The Wikimedia checkpoint above was not retrained on these renders.
 
-Any number from `outputs/training/yolov8_synthetic/` is a CPU smoke test on drawn images. It is not plant performance and it is not a reproduced mAP@0.5 of 0.93. The command is `python train.py --config configs/train_synthetic.yaml --data configs/data_synthetic.yaml --run-name yolov8_synthetic`.
+Any number from `outputs/training/yolov8_synthetic/` is a CPU smoke test on those diagrams. It is not plant performance, not a shop-inspect result, and not a reproduced mAP@0.5 of 0.93. The command is `python train.py --config configs/train_synthetic.yaml --data configs/data_synthetic.yaml --run-name yolov8_synthetic`.
 
-One epoch, image size 320, batch 8, AdamW, learning rate 0.001, seed 42, CPU, workers 0, horizontal flip off. The single row of `outputs/training/yolov8_synthetic/results.csv` is the validation split of these renders (105 images): precision 0.00197, recall 0.50476, mAP@0.5 0.2585, mAP@0.5:0.95 0.16596. The Wikimedia test mAP@0.5 of 0.12375 was not replaced.
+One epoch, image size 320, batch 8, AdamW, learning rate 0.001, seed 42, CPU, workers 0, horizontal flip off. The single row of `outputs/training/yolov8_synthetic/results.csv` is the validation split of these diagrams (105 images): precision 0.00197, recall 0.50476, mAP@0.5 0.2585, mAP@0.5:0.95 0.16596. The Wikimedia test mAP@0.5 of 0.12375 was not replaced.
+
+## Shop-inspect training slot (`data/shop`)
+
+`data/shop/` is the current synthetic training set: 700 shop-inspect renders, split 490/105/105. `configs/data.yaml` points at it. This slot is empty.
+
+Checked on 2026-10-09: `/cursor/stores/self/training-cloud/best.pt` and `/cursor/stores/self/training-cloud/evaluation_summary.json` were not present. Nothing was copied into `outputs/training/yolov8_shop/`. No precision, recall, or mAP is recorded for this domain. Do not copy the Wikimedia 0.12375 or the diagram-set 0.2585 into this slot. Do not treat either number as plant performance or as the reference target of about 0.93.

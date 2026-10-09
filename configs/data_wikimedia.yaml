@@ -1,0 +1,14 @@
+# Wikimedia photos only. Not data/shop and not data/synthetic.
+# Resolved from the repository root. train.py changes to that directory first.
+path: data
+train: train/images
+val: val/images
+test: test/images
+names:
+  0: scratch
+  1: dent
+  2: weld_porosity
+  3: weld_crack
+  4: corrosion
+  5: misaligned_busbar
+  6: missing_or_loose_component

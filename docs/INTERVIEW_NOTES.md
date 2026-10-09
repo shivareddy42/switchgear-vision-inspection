@@ -12,7 +12,7 @@ In this repo that combination is concrete. Twenty-seven Wikimedia Commons files 
 
 Public data does not capture every shop-floor lighting, focus and camera-placement condition. Training augmentation simulates moderate changes in brightness, contrast, blur, noise, orientation and scale. Validation/test data remain untouched.
 
-The training presentations on the Wikimedia photos were 5 epochs times 16 images, so 80, with the mild limits in `configs/train.yaml`. The preview grid uses Albumentations on `Metal_Dented_Defect.jpg` so the boxes can be checked. Augmentation did not add weld porosity, a misaligned busbar, or a missing fastener. Those three classes still have zero photo labels. A separate procedural set in `data/synthetic/` draws 100 images per class. Those 700 renders are not the 6,800 factory images and are not mixed into the photo split.
+The training presentations on the Wikimedia photos were 5 epochs times 16 images, so 80, with the mild limits in `configs/train.yaml`. The preview grid uses Albumentations on `Metal_Dented_Defect.jpg` so the boxes can be checked. Augmentation did not add weld porosity, a misaligned busbar, or a missing fastener. Those three classes still have zero photo labels. `data/synthetic/` is an earlier diagram set, 100 images per class. `data/shop/` is the shop-inspect training set, 700 images split 490/105/105. Neither is the 6,800 factory images, and neither is mixed into the photo metric.
 
 ## Why YOLOv8?
 
