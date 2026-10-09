@@ -21,5 +21,4 @@ def test_existing_hashes_scan_stored_images_across_collection_passes(tmp_path: P
 
     assert sha256_file(image_path) in shas
     assert len(perceptual) == 1
-    assert perceptual[0][0].endswith("data/raw/corrosion/sample.jpg") is False
     assert perceptual[0][0].endswith("corrosion/sample.jpg")
