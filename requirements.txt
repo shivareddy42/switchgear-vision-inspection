@@ -1,7 +1,10 @@
-# CPU PyTorch wheels. A GPU machine can install the default torch build instead.
+# Linux uses CPU wheels; macOS/Windows use the standard platform wheels.
+# A CUDA machine can install its matching torch/torchvision build separately.
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.14.1+cpu
-torchvision==0.29.1+cpu
+torch==2.14.1+cpu; sys_platform == "linux"
+torchvision==0.29.1+cpu; sys_platform == "linux"
+torch==2.14.1; sys_platform != "linux"
+torchvision==0.29.1; sys_platform != "linux"
 ultralytics==8.4.174
 opencv-python-headless==5.0.0.93
 pillow==12.3.0

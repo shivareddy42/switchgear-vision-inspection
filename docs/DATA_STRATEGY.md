@@ -30,7 +30,7 @@ RIAWELC has a porosity class, but the images are radiographs and the README does
 
 Annotation is moderate when the pits are in the photo. The box covers the porous patch, not the whole bead. A crater or slag island is not porosity.
 
-No image in this repository is labeled weld_porosity. A second Commons search on 2026-10-08 did not find pores in a weld bead under a license that allows storing the file. `File:Porosity.jpg` is holes in a flat sheet. `File:Cast porosity defect.jpg` is casting. `Category:Porosity` is soil and materials figures. Those were not mapped.
+No photograph in the public-photo dataset is labeled weld_porosity; the synthetic datasets do include this class. A second Commons search on 2026-10-08 did not find pores in a weld bead under a license that allows storing the file. `File:Porosity.jpg` is holes in a flat sheet. `File:Cast porosity defect.jpg` is casting. `Category:Porosity` is soil and materials figures. Those were not mapped.
 
 ## weld_crack
 
@@ -66,7 +66,7 @@ Wikimedia has busbar photos. `2500A copper busbars in motor control panel.jpg` s
 
 Annotation needs a fixture reference. Without a known correct position, a box would be a guess.
 
-No image in this repository is labeled misaligned_busbar.
+No photograph in the public-photo dataset is labeled misaligned_busbar; the synthetic datasets do include this class.
 
 ## missing_or_loose_component
 
@@ -76,7 +76,7 @@ A fastener, terminal, breaker, or bracket is absent or obviously not seated, and
 
 Annotation is only valid when the missing part's location can be seen. Boxing a whole cabinet is not acceptable.
 
-No image in this repository is labeled missing_or_loose_component.
+No photograph in the labeled public-photo training split is labeled missing_or_loose_component; the synthetic datasets do include this class. The separately filed domain-gap review photo is not a ground-truth training label.
 
 ## What this means
 

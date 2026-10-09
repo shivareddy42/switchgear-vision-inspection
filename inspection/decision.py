@@ -7,6 +7,7 @@ the threshold for its class. Equality does not exceed the threshold.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 
 import yaml
 
@@ -35,6 +36,8 @@ def load_thresholds(path) -> tuple[float, dict[str, float], str]:
     unknown = sorted(set(per_class) - set(CLASS_NAMES))
     if unknown:
         raise ValueError(f"unknown classes in thresholds: {unknown}")
+    if not all(math.isfinite(value) and 0 <= value <= 1 for value in [default, *per_class.values()]):
+        raise ValueError("confidence thresholds must be finite values in 0..1")
     return default, per_class, status
 
 

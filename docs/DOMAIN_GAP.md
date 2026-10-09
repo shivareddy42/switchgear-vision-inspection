@@ -2,7 +2,7 @@
 
 The synthetic-domain shop-inspect test mAP@0.5 is 0.993238 (0.993). That number does not transfer to these photographs. The renders in `data/shop/` are procedural. This page is what `outputs/training/yolov8_shop/weights/best.pt` actually output on real licensed photos. It is not a new mAP, and it is not plant performance.
 
-No training was run for this check. The photos were not relabeled to match the model. Folder names below are the filing that already existed under `/cursor/stores/self/licensed-enclosures/`.
+No training was run for this check. The photos were not relabeled to match the model. Folder names below describe the licensed-photo review set used for this check.
 
 ## What was run
 
@@ -56,4 +56,4 @@ Opened photos of ordinary gear drew the same classes at high confidence on handl
 
 ## What this is not
 
-This is not a measured mAP on photographs. The 0.993 figure stays a synthetic-domain test result. The reference targets (mAP@0.5 around 0.93, about 42 ms/frame on a Jetson, about 6,800 factory images) were not measured here either.
+This is not a measured mAP on photographs. The 0.993 figure stays a synthetic-domain test result. No plant-level accuracy or Jetson latency claim is made from this run.

@@ -20,6 +20,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-Third-party images under data/ are not covered by this MIT license. Each file
-keeps the license named in data/sources.csv. CC BY and CC BY-SA images require
-attribution. CC BY-SA adaptations must stay under a compatible license.
+Third-party images under data/ and outputs/ are not covered by this MIT license.
+Photo licenses and attribution are recorded in data/sources.csv and
+outputs/real_photo_predictions/attribution.csv. Annotated adaptations retain the
+listed photo license, including CC BY-SA where applicable.
+The bundled Liberation fonts retain their SIL Open Font License 1.1 in
+scripts/shop_inspect/assets/LICENSE.

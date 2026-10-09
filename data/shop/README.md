@@ -11,11 +11,10 @@ factory. They were drawn with a pinhole camera, painted or brushed metal
 shading, and defect masks. They are not frames taken from the licensed
 reference photos, and they are not copies of any catalog or website.
 
-Do **not** report this folder as a 6,800-image factory dataset.
-Do **not** report a 0.93 mAP from these files. The renders here were not
-scored in place. The held-out synthetic-domain test is in `docs/MODEL_CARD.md`
-and `outputs/training/yolov8_shop/`. These renders are procedural, and that
-score does not transfer to plant photos.
+Do **not** treat this folder as a factory dataset or interpret its benchmark as
+plant performance. The held-out synthetic-domain test is documented in
+`docs/MODEL_CARD.md` and `outputs/training/yolov8_shop/`. These renders are
+procedural, and their score does not transfer to plant photos.
 
 ## What the pictures show
 
@@ -79,14 +78,22 @@ Per-class image counts (an image can count toward more than one class):
 
 Split counts: train 490, val 105, test 105.
 
-## Reproduce
+## Reproducibility note
 
-```bash
-python3 generate.py --output /path/to/synthetic-enclosures
-```
+The original `shop-inspect-1.0.0` generator is now archived unchanged at
+`scripts/shop_inspect/generate.py`. Its SHA-256 is
+`602137072a30e85ad93640fa4bc21b349a897ce5538fe794c353629b1d2ae854`.
+The portable launcher uses the exported fonts and requires a fresh output
+folder. See [generator instructions](../../scripts/shop_inspect/README.md)
+for regeneration and verification commands, provenance, and environment limits.
 
-Requires Python 3, numpy, opencv-python-headless, and Pillow. No network
-access and no downloaded photographs.
+The original rendering interpreter, dependency lockfile, and command line were
+not recorded. The supplied environment records a later plan check, not the
+original render. Matching all manifest rows establishes the plan and split;
+it does not establish byte-identical output for all 700 images.
+
+`scripts/synthesize_enclosures.py` produces `data/synthetic/`; it is a separate
+renderer and is not the source of this shop-inspect benchmark.
 
 ## Parameters (shop-inspect-1.0.0)
 

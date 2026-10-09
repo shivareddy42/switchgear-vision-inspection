@@ -68,7 +68,9 @@ def main() -> int:
         report["comparison"] = "no sample image"
     else:
         image = read_bgr(image_path)
-        pytorch = model.predict(source=image, device="cpu", verbose=False, imgsz=args.imgsz)
+        if image is None:
+            raise ValueError(f"could not decode sample image: {image_path}")
+        pytorch = model.predict(source=image, device="cpu", verbose=False, imgsz=args.imgsz, rect=False)
         session = ort.InferenceSession(str(exported), providers=["CPUExecutionProvider"])
         blob = _letterbox(image, args.imgsz)
         input_name = session.get_inputs()[0].name
@@ -95,9 +97,9 @@ def main() -> int:
 
 
 def _letterbox(image, size: int):
-    import cv2
+    from ultralytics.data.augment import LetterBox
 
-    resized = cv2.resize(image, (size, size), interpolation=cv2.INTER_LINEAR)
+    resized = LetterBox(new_shape=(size, size), auto=False)(image=image)
     rgb = resized[:, :, ::-1]
     blob = rgb.astype(np.float32) / 255.0
     blob = np.transpose(blob, (2, 0, 1))[None]

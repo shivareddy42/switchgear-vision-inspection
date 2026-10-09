@@ -1,6 +1,6 @@
 # Model card
 
-## Resume / project reference targets
+## Project-specification reference targets (not reproduced here)
 
 These numbers come from the project description. This repository did not reproduce them.
 
@@ -39,7 +39,7 @@ At confidence 0.50 and IoU 0.50, the `scope=all` row of `outputs/training/yolov8
 
 Per-class average precision on the same test split is in `evaluation_summary.json` and `per_class_metrics.csv` (`ap50`): scratch 0.995, dent 0.995, weld_porosity 0.995, weld_crack 0.994032, corrosion 0.995, misaligned_busbar 0.995, missing_or_loose_component 0.983636.
 
-Validation mAP@0.5 was 0.990. The last epoch of `outputs/training/yolov8_shop/results.csv` (epoch 40, 105 validation images) records `metrics/mAP50(B)` 0.99071, which rounds to 0.990. That row is validation, not the held-out test.
+Validation mAP@0.5 was 0.99071 (0.991 rounded to three decimals). The last epoch of `outputs/training/yolov8_shop/results.csv` (epoch 40, 105 validation images) records `metrics/mAP50(B)` 0.99071, which rounds to 0.991. That row is validation, not the held-out test.
 
 ONNX loads. The copied summary records `onnx.checker` passed, an ONNX Runtime session opened, and a dummy forward succeeded. Input name `images`, shape `[1, 3, 640, 640]`, 44,728,911 bytes. That is not a claim that decoded boxes match, and it is not the Wikimedia head shape.
 
@@ -76,7 +76,7 @@ The model in this section is not a plant inspection model. It was trained on 16 
 
 ### Diagram-set smoke test (`data/synthetic`)
 
-This is the earlier procedural set, not the shop-inspect training target. `data/synthetic/` holds 700 diagram renders, 100 per class, split 490/105/105 before training augmentation. That count is not the resume target of about 6,800 factory images. The Wikimedia checkpoint above was not retrained on these renders.
+This is the earlier procedural set, not the shop-inspect training target. `data/synthetic/` holds 700 diagram renders, 100 per class, split 490/105/105 before training augmentation. That count is not the project-specification target of about 6,800 factory images. The Wikimedia checkpoint above was not retrained on these renders.
 
 Any number from `outputs/training/yolov8_synthetic/` is a CPU smoke test on those diagrams. It is not plant performance, not a shop-inspect result, and not a reproduced mAP@0.5 of 0.93. The command is `python train.py --config configs/train_synthetic.yaml --data configs/data_synthetic.yaml --run-name yolov8_synthetic`.
 
